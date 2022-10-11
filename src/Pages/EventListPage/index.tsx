@@ -1,6 +1,6 @@
 import EventList from '@/components/EventList'
 import SearchBar from './SearchBar'
-import TagBar from './TagBar'
+import TagBar from '../../components/TagBar'
 import Title from './Title'
 import DatePicker from './DatePicker'
 import TabList from './TabList'

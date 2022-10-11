@@ -7,16 +7,19 @@ import Box from '@mui/material/Box'
 import Tab from '@mui/material/Tab'
 import Tabs from '@mui/material/Tabs'
 import TabPanel from '../EventListPage/TabPanel'
+import BasicInfo from './BasicInfo'
+import SettingsForm from './SettingsPage'
+import MyEventList from './MyEventList'
+import EventList from '@/components/EventList'
 
 export default function ProfileCard (): JSX.Element {
-  const [value, setValue] = React.useState(1)
+  const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue)
   }
   return (
     <Card sx={{ width: '90%' }}>
-      <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" className="flex">
             <Avatar sx={{ height: 80, width: 80 }}></Avatar>
@@ -30,7 +33,7 @@ export default function ProfileCard (): JSX.Element {
             </div>
 
           </Typography>
-          <Box sx={{ width: '100%' }}>
+          <Box sx={{ width: '100%', minHeight: '60vh' }}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="Information" />
@@ -39,17 +42,16 @@ export default function ProfileCard (): JSX.Element {
                     </Tabs>
                     </Box>
                 <TabPanel value={value} index={0}>
-                    Basic Info
+                    <BasicInfo />
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    Settings
+                    <SettingsForm />
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                            Item Three
+                           <MyEventList/>
                         </TabPanel>
                     </Box>
         </CardContent>
-      </CardActionArea>
     </Card>
   )
 }

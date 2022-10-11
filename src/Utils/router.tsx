@@ -1,11 +1,11 @@
 import App from '../App'
-import EventDetail from '../Pages/EventDetailPage'
-import EventListPage from '../Pages/EventListPage'
-import HomePage from '../Pages/HomePage'
-import InformationPage from '../Pages/InformationPage'
-import NotFoundPage from '../Pages/NotFoundPage'
-import LoginPgae from '../Pages/LoginPage'
-import ProfilePage from '../Pages/ProfilePage'
+import EventDetail from '../pages/EventDetailPage'
+import EventListPage from '../pages/EventListPage'
+import HomePage from '../pages/HomePage'
+import InformationPage from '../pages/InformationPage'
+import NotFoundPage from '../pages/NotFoundPage'
+import LoginPgae from '../pages/LoginPage'
+import ProfilePage from '../pages/ProfilePage'
 
 import {
   createBrowserRouter

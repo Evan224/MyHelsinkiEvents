@@ -4,6 +4,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import EventImage from '@/assets/img/party-event.jpg'
 import { useState, useEffect } from 'react'
+import useFetch from '@/utils/hooks/useFetch'
 
 function EditorCard (Props: EventCardProps): JSX.Element {
   const { picture = EventImage, title, date, description } = Props
@@ -41,45 +42,43 @@ function EditorCard (Props: EventCardProps): JSX.Element {
   )
 }
 
-const mockingEvents: EventCardProps[] = [
-  {
-    picture: 'https://source.unsplash.com/random',
-    title: 'this is title this is a vry very asdasda',
-    date: {
-      month: 'Aug',
-      day: '12'
-    },
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
-  },
-  {
-    picture: 'https://source.unsplash.com/random',
-    title: 'this is title this is a vry very asdasda',
-    date: {
-      month: 'Aug',
-      day: '12'
-    },
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
-  },
-  {
-    picture: 'https://source.unsplash.com/random',
-    title: 'this is title this is a vry very asdasda',
-    date: {
-      month: 'Aug',
-      day: '12'
-    },
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
-  }
+// const mockingEvents: EventCardProps[] = [
+//   {
+//     picture: 'https://source.unsplash.com/random',
+//     title: 'this is title this is a vry very asdasda',
+//     date: {
+//       month: 'Aug',
+//       day: '12'
+//     },
+//     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
+//   },
+//   {
+//     picture: 'https://source.unsplash.com/random',
+//     title: 'this is title this is a vry very asdasda',
+//     date: {
+//       month: 'Aug',
+//       day: '12'
+//     },
+//     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
+//   },
+//   {
+//     picture: 'https://source.unsplash.com/random',
+//     title: 'this is title this is a vry very asdasda',
+//     date: {
+//       month: 'Aug',
+//       day: '12'
+//     },
+//     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
+//   }
 
-]
+// ]
 
 const EditorCardList = (): JSX.Element => {
-  const [events, setEvents] = useState<EventCardProps[]>([])
-  useEffect(() => {
-    setEvents(mockingEvents)
-  }, [])
+  const [events, setEvents] = useFetch({}, 'get-all-events')
+
   return (
         <div className='flex w-4/5 mx-auto'>
-        {events.map((event, index) => (
+        {events.slice(0, 3).map((event, index) => (
             <EditorCard key={index} {...event} />
         ))}
         </div>

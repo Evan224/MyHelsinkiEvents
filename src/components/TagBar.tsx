@@ -26,5 +26,12 @@ const tags = [
   { title: 'Music' },
   { title: 'Art' },
   { title: 'Sports' },
-  { title: 'Food' }
+  { title: 'Food' },
+  { title: 'Culture' },
+  { title: 'Education' },
+  { title: 'Health' },
+  { title: 'Science' },
+  { title: 'Technology' },
+  { title: 'Business' },
+  { title: 'Politics' }
 ]

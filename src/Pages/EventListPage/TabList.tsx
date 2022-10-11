@@ -4,13 +4,20 @@ import Tab from '@mui/material/Tab'
 import TabPanel from './TabPanel'
 import Box from '@mui/material/Box'
 import EventList from '@/components/EventList'
+import useFetch from '@/utils/hooks/useFetch'
+import { shuffle } from '@/utils'
 
 export default function BasicTabs (): JSX.Element {
   const [value, setValue] = React.useState(0)
+  const [events, setEvents] = useFetch({}, 'get-all-events')
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
+
+  const eventsList1 = events.slice(0, 8)
+  const eventsList2 = events.slice(0, 4)
+  const eventsList3 = events.slice(3, 8)
 
   return (
     <Box sx={{ width: '100%', paddingX: 'auto' }}>
@@ -22,13 +29,13 @@ export default function BasicTabs (): JSX.Element {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        <EventList events={tests}/>
+        <EventList events={eventsList1}/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-         <EventList events={tests2}/>
+         <EventList events={eventsList2}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <EventList events={tests}/>
+        <EventList events={eventsList3}/>
       </TabPanel>
     </Box>
   )

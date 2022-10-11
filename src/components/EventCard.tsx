@@ -4,11 +4,11 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
-import EventImage from '@/assets/img/party-event.jpg'
-
+import { useNavigate } from 'react-router-dom'
 
 export default function EventCard (Props: EventCardProps): JSX.Element {
-  const { picture = EventImage, title, date, description } = Props
+  const navigate = useNavigate()
+  const { picture, title, date, description } = Props
   const { month, day } = date
   return (
     <Card sx={{
@@ -25,10 +25,10 @@ export default function EventCard (Props: EventCardProps): JSX.Element {
         image={picture}
         alt="Not Found"
       />
-      <CardContent className='flex flex-col' sx={{
+      <CardContent className='flex flex-col hover:bg-gray-100' sx={{
         height: '40%',
         padding: '1rem'
-      }}>
+      }} onClick={e => { navigate('/eventdetail') }}>
         <div className='flex justify-between'>
           <Typography gutterBottom variant="h6" component="div">
             {title}
