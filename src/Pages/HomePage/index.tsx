@@ -4,9 +4,6 @@ import Title from './UpcomingTitle'
 import LoadMore from './LoadMore'
 import CreateEvent from './CreateEvent'
 import EditorCardList from './EditorCard'
-import { useLayoutEffect, useState } from 'react'
-
-import axios from 'axios'
 import useFetch from '@/utils/hooks/useFetch'
 
 export default function HomePage (): JSX.Element {

@@ -1,4 +1,4 @@
-interface EventCardProps {
+export interface EventCardProps {
   picture?: string;
   title: string;
   date: {
@@ -9,7 +9,7 @@ interface EventCardProps {
   tags?: string[];
 }
 
-interface EventListProps {
+export interface EventListProps {
   events: EventCardProps[];
   cssStyle?: string;
 }
