@@ -28,7 +28,7 @@ export default function BasicTabs (): JSX.Element {
           <Tab label="My own" />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0} className="?????">
+      <TabPanel value={value} index={0} >
         <EventList events={eventsList1}/>
       </TabPanel>
       <TabPanel value={value} index={1}>

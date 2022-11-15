@@ -13,11 +13,16 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useState } from 'react'
+import { useLocation} from 'react-router-dom'
 
 const theme = createTheme()
 
 export default function SignInSide (): JSX.Element {
-  const [formState, setFormState] = useState<'login' | 'sign'>('login')
+  // react Router params
+  const location = useLocation()
+  const [formState, setFormState] = useState(location.state?.formState||'login' )
+
+  // const [formState, setFormState] = useState<'login' | 'sign'>(state as 'login' | 'sign')
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
@@ -32,7 +37,6 @@ export default function SignInSide (): JSX.Element {
       <Grid container component="main" sx={{
         height: '90vh',
         dipslay: 'flex'
-        // flexDirection: 'row-reverse'
       }}>
         <CssBaseline />
         <Grid

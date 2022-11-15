@@ -14,19 +14,20 @@ export default function EventCard (Props: EventCardProps): JSX.Element {
     <Card sx={{
       borderRadius: '5%',
       width: '30%',
-      height: 400,
-      margin: '1rem'
+      marginRight: '1.5rem',
+      marginY: '1rem'
     }}>
       <CardMedia
         component="img"
         sx={{
-          height: '60%'
+          height: '40%',
+          objectFit: 'cover'
         }}
         image={picture}
         alt="Not Found"
       />
       <CardContent className='flex flex-col hover:bg-gray-100' sx={{
-        height: '40%',
+        height: '60%',
         padding: '1rem'
       }} onClick={e => { navigate('/eventdetail') }}>
         <div className='flex justify-between'>

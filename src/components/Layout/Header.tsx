@@ -5,14 +5,11 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import EventIcon from '@mui/icons-material/Event'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 import Tabs from '@mui/material/Tabs'
 import LinkTab from '@mui/material/Tab'
-import TabContext from '@mui/lab/TabContext'
-import TabList from '@mui/lab/TabList'
-import TabPanel from '@mui/lab/TabPanel'
 
 const menu = [
   {
@@ -36,10 +33,19 @@ const menu = [
 const Tabmenu = (): JSX.Element => {
   const location = useLocation()
   const [value, setValue] = useState(menu.findIndex((item) => item.path === location.pathname))
+  // console.log(location.pathname)
+  // if(location.pathname === '/loginpage'){
+  //   setValue(-1)
+  // }
+  useEffect(() => {
+    if(location.pathname === '/loginpage'){
+      setValue(-1)
+    }
+  }, [location.pathname])
   const navigate = useNavigate()
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     event.preventDefault()
-    console.log(newValue)
+    // console.log(newValue)
     setValue(Number(newValue))
     navigate(menu[Number(newValue)].path)
   }

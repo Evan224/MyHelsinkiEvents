@@ -13,7 +13,6 @@ function EditorCard (Props: EventCardProps): JSX.Element {
     <Card sx={{
       borderRadius: '5%',
       width: '30%',
-      height: 400,
       margin: '1rem'
     }}>
       <CardMedia
