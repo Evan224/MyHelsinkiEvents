@@ -7,11 +7,11 @@ import TabList from './TabList'
 
 export default function EventListPage (): JSX.Element {
   return (
-    <div className='w-9/10 mx-auto'>
-      <div className='bg-gradient-to-r from-cyan-100 to-blue-100'>
+    <div className='mx-auto'>
+      <div className='bg-gradient-to-r from-cyan-100 to-blue-100 w-[100vw]'>
         <Title title='Search your events!' />
         <div className='flex flex-col items-start w-4/5 mx-auto'>
-          <div className="flex justify-between w-4/5 p-5 ">
+          <div className="flex justify-around w-full p-5 ">
             <SearchBar />
             <DatePicker />
           </div>

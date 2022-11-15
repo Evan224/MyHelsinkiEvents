@@ -19,7 +19,7 @@ export default function TabPanel (props: TabPanelProps): JSX.Element {
         {...other}
       >
         {value === index && (
-          <Box sx={{ p: 3 }}>
+          <Box >
             <div>{children}</div>
           </Box>
         )}

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button'
 export default function Hire (): JSX.Element {
   return (
         <div className="flex justify-center w-4/5 p-5 flex-col items-center
-            h-[40vh] ">
+            min-h-[40vh] ">
               <Typography variant="h6" component="div" sx={{
                 color: 'text.secondary'
               }} className="flex justify-center items-center" >

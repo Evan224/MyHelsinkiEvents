@@ -3,7 +3,7 @@ import Button from '@mui/material/Button'
 export default function Hire (): JSX.Element {
   return (
         <div className="flex justify-center w-4/5 p-5 pt-20 flex-col items-center
-            h-[40vh] ">
+            min-h-[40vh] ">
              <Typography variant="h3" component="div" className='p-5'>
                 Work with Us!
             </Typography>

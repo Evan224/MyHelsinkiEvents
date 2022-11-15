@@ -15,7 +15,7 @@ function ValueItem (Props: { value: string, text: string }): JSX.Element {
 
 export default function Values (): JSX.Element {
   return (
-        <div className='bg-gradient-to-r from-cyan-100 to-blue-500 '>
+        <div className='bg-gradient-to-r from-cyan-100 to-blue-500 p-4'>
         <div className='flex flex-wrap w-4/5 mx-auto'>
             {ValueList.map((value, index) => {
               return (

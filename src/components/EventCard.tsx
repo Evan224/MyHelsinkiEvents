@@ -5,29 +5,31 @@ import CardMedia from '@mui/material/CardMedia'
 import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
+import { height } from '@mui/system'
 
 export default function EventCard (Props: EventCardProps): JSX.Element {
   const navigate = useNavigate()
   const { picture, title, date, description } = Props
   const { month, day } = date
   return (
+    <div className='w-1/3'>
     <Card sx={{
       borderRadius: '5%',
-      width: '30%',
+      width: '90%',
       marginRight: '1.5rem',
-      marginY: '1rem'
+      marginY: '1rem',
     }}>
       <CardMedia
         component="img"
         sx={{
-          height: '40%',
+          height: '10rem',
           objectFit: 'cover'
         }}
         image={picture}
         alt="Not Found"
       />
       <CardContent className='flex flex-col hover:bg-gray-100' sx={{
-        height: '60%',
+        height: '10rem',
         padding: '1rem'
       }} onClick={e => { navigate('/eventdetail') }}>
         <div className='flex justify-between'>
@@ -43,10 +45,13 @@ export default function EventCard (Props: EventCardProps): JSX.Element {
           </Typography>
           </div>
         </div>
-        <Typography gutterBottom variant="body2" component="div">
+        <Typography gutterBottom variant="body2" component="div" sx={{
+          height: '3rem',
+        }}>
           {description}
         </Typography>
       </CardContent>
     </Card>
+    </div>
   )
 }

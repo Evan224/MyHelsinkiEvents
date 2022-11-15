@@ -1,7 +1,21 @@
-import EventList from '@/components/EventList'
+import EventCard from '@/components/EventCard'
 
-export default function MyEventList (): JSX.Element {
-  return <EventList events={tests}/>
+// export default function MyEventList (): JSX.Element {
+//   return <EventList events={tests}/>
+// }
+
+export default function myEventList (props: EventListProps): JSX.Element {
+  const cssString = props?.cssStyle ?? 'flex  flex-wrap '
+  const events= props?.events ?? tests
+  return (
+          <div className={cssString+"flex mx-auto"}>
+            {events.map((item, index) => {
+              return (
+                <EventCard key={index} {...item} />
+              )
+            })}
+          </div>
+  )
 }
 
 const tests = [
@@ -21,16 +35,15 @@ const tests = [
       month: 'Sep',
       day: '13'
     },
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
+    description:'21'
   },
   {
     picture: 'https://source.unsplash.com/random',
     title: 'this is title this is a vry very asdasda',
     date: {
       month: 'Oct',
-      day: '14'
     },
-    description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
+    description:'21'
   },
   {
     picture: 'https://source.unsplash.com/random',
