@@ -8,6 +8,9 @@ import TagBar from '@/components/TagBar'
 import EventList from '@/components/EventList'
 
 export default function EventsForm () {
+  const callback=(tag:string)=>{
+    console.log(tag)
+  }
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -15,7 +18,7 @@ export default function EventsForm () {
       </Typography>
       <Grid container spacing={3}>
         <Grid item xs={12} md={12}>
-          <TagBar />
+          <TagBar callback={callback}/>
           <Typography variant="h6" gutterBottom className="flex p-4">
         There are some events that you might be interested in!
       </Typography>

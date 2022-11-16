@@ -6,6 +6,11 @@ import InformationPage from '../pages/InformationPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import LoginPgae from '../pages/LoginPage'
 import ProfilePage from '../pages/ProfilePage'
+import { redirect } from "react-router-dom";
+
+const homePageloader = async () => {
+  return redirect("/homepage");
+};
 
 import {
   createBrowserRouter
@@ -15,7 +20,8 @@ import Layout from '@/components/Layout'
 const path = [
   {
     path: '/',
-    element: <App />
+    element: <App />,
+    loader: homePageloader,
   },
   {
     path: '/eventlist',

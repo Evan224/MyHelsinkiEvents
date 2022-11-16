@@ -45,12 +45,8 @@ const reducer = (state:StateProps, action:ActionProps) => {
 export default function EventListPage (): JSX.Element {
   // tags, date, search
   const [state, dispatch] = useReducer(reducer, initialState)
-  useEffect(() => {
-    console.log(state)
-  }, [state])
-
   const callBackSearch = (value:string) => {
-    console.log(state)
+    // console.log(state)
     //todo Get data from backend
   }
 

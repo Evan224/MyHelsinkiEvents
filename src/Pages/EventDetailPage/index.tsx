@@ -8,12 +8,11 @@ import LoadingSpinner from '@/components/LoadingSpinner'
 // mock one data
 export default function EventDetail (): JSX.Element {
   const [events, setEvents] = useFetch({}, 'get-all-events')
-  console.log(events)
-  // const randomEvent = shuffle(events)[0]
+
+  
   const randomEvent = useMemo(() => {
     return shuffle(events)[0]
   }, [events])
-
 
   if(!randomEvent) return (
     <LoadingSpinner />
@@ -21,7 +20,7 @@ export default function EventDetail (): JSX.Element {
   return (
         <div className="flex justify-center w-[100vw]">
             <div className="background">
-                <img src={randomEvent.picture} className="object-none h-[30vh] w-full">
+                <img src={randomEvent.picture} className="object-cover h-[30vh] w-full">
                 </img>
                 <TitleInfo {...randomEvent} />
                 <DetailCards />

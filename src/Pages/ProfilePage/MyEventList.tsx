@@ -1,13 +1,16 @@
 import EventCard from '@/components/EventCard'
+import CreateEventForm from '@/components/CreateEventForm'
 
 // export default function MyEventList (): JSX.Element {
 //   return <EventList events={tests}/>
 // }
 
-export default function myEventList (props: EventListProps): JSX.Element {
+export default function myEventList (props: Event.EventListProps): JSX.Element {
   const cssString = props?.cssStyle ?? 'flex  flex-wrap '
   const events= props?.events ?? tests
   return (
+    <div className='flex flex-col'>
+          <CreateEventForm/>
           <div className={cssString+"flex mx-auto"}>
             {events.map((item, index) => {
               return (
@@ -15,8 +18,10 @@ export default function myEventList (props: EventListProps): JSX.Element {
               )
             })}
           </div>
+          </div>
   )
 }
+
 
 const tests = [
   {

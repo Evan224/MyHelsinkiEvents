@@ -1,24 +1,26 @@
 import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
-import { Button } from '@mui/material';
+import CreateForm from './CreateForm';
+import Button from '@mui/material/Button';
 
 export default function CreateEventForm() {
     const [state, setState] = useState(false);
 
     return (
         <>
-         <div className="flex justify-around mt-10">
+         <div className="flex my-10">
          <Button variant="outlined" color="primary" className="w-2/5" onClick={()=>setState(true)}>
-            Create Event</Button>
+            Create New Event</Button>
          </div>
         <Drawer
             anchor="right"
             open={state}
             onClose={() => {setState(false)}}
+            sx={{
+                width: '50%',
+            }}
         >
-            <div>
-                <h1>hello</h1>
-            </div>
+              <CreateForm />
         </Drawer>
         </>
         )

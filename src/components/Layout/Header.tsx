@@ -30,21 +30,28 @@ const menu = [
   }
 ]
 
+
 const Tabmenu = (): JSX.Element => {
   const location = useLocation()
-  const [value, setValue] = useState(menu.findIndex((item) => item.path === location.pathname))
-  // console.log(location.pathname)
-  // if(location.pathname === '/loginpage'){
-  //   setValue(-1)
-  // }
+  const [value, setValue] = useState<number|boolean>(false);
   useEffect(() => {
-    setValue(menu.findIndex((item) => item.path === location.pathname))
+    const newValue= menu.findIndex((item) => item.path === location.pathname)
+    if(newValue !== -1) {
+      setValue(value)
+    }else{
+      setValue(false)
+    }
   }, [location.pathname])
+
   const navigate = useNavigate()
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     event.preventDefault()
-    // console.log(newValue)
-    setValue(Number(newValue))
+    if(Number(newValue)<0){
+      setValue(false)
+    }else{
+      setValue(Number(newValue))
+    }
+
     navigate(menu[Number(newValue)].path)
   }
   return (
