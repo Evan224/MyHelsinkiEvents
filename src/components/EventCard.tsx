@@ -6,8 +6,10 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import { useNavigate } from 'react-router-dom'
 import { height } from '@mui/system'
+import { getMonthShortName } from '@/utils'
 
-export default function EventCard (Props: EventCardProps): JSX.Element {
+
+export default function EventCard (Props: Event.EventCardProps): JSX.Element {
   const navigate = useNavigate()
   const { picture, title, date, description } = Props
   const { month, day } = date
@@ -38,7 +40,7 @@ export default function EventCard (Props: EventCardProps): JSX.Element {
           </Typography>
           <div className='flex flex-col'>
           <Typography gutterBottom variant="body1" component="div">
-            {month}
+            {getMonthShortName(Number(month))} 
           </Typography>
           <Typography gutterBottom variant="h5" component="div">
             {day}

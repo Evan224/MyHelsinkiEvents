@@ -7,4 +7,11 @@ function shuffle(arr: any[]) {
   return arr;
 }
 
-export { shuffle };
+function getMonthShortName(monthNo: number) {
+  const date = new Date();
+  date.setMonth(monthNo - 1);
+
+  return date.toLocaleString("en-US", { month: "short" });
+}
+
+export { getMonthShortName, shuffle };

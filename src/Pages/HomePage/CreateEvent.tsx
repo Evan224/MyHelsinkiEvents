@@ -1,5 +1,6 @@
 import Button from '@mui/material/Button'
 
+
 export default function CreateEvent (): JSX.Element {
   return (
         <div className='flex flex-col mx-auto items-center text-cyan-800 justify-center

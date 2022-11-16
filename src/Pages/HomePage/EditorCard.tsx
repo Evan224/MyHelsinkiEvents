@@ -6,7 +6,7 @@ import EventImage from '@/assets/img/party-event.jpg'
 import { useState, useEffect } from 'react'
 import useFetch from '@/utils/hooks/useFetch'
 
-function EditorCard (Props: EventCardProps): JSX.Element {
+function EditorCard (Props: Event.EventCardProps): JSX.Element {
   const { picture = EventImage, title, date, description } = Props
   const { month, day } = date
   return (
