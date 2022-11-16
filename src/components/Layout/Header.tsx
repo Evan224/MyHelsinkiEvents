@@ -38,9 +38,7 @@ const Tabmenu = (): JSX.Element => {
   //   setValue(-1)
   // }
   useEffect(() => {
-    if(location.pathname === '/loginpage'){
-      setValue(-1)
-    }
+    setValue(menu.findIndex((item) => item.path === location.pathname))
   }, [location.pathname])
   const navigate = useNavigate()
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {

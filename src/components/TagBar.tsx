@@ -1,13 +1,16 @@
 import Autocomplete from '@mui/material/Autocomplete'
 import TextField from '@mui/material/TextField'
 
-export default function TagBar (): JSX.Element {
+export default function TagBar ({callback}:{callback:Function}): JSX.Element {
+
+
   return (
         <div className="w-3/5 p-5">
         <Autocomplete
             multiple
             id="tags-standard"
             options={tags}
+            onChange={(event, value) => callback(value)}
             getOptionLabel={(option) => option.title}
             renderInput={(params) => (
             <TextField
