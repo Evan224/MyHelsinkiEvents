@@ -23,6 +23,8 @@ export default function BasicTabs (): JSX.Element {
   const eventsList1 = formattedEvents.slice(0, 8)
   const eventsList2 = formattedEvents.slice(0, 4)
   const eventsList3 = formattedEvents.slice(3, 8)
+  const eventsList4 = formattedEvents.slice(3, 7)
+
 
   return (
     <div className='w-full'>
@@ -31,6 +33,7 @@ export default function BasicTabs (): JSX.Element {
           <Tab label="Recommend" />
           <Tab label="My Favorite" />
           <Tab label="My own" />
+          <Tab label="My Follow" />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} >
@@ -41,6 +44,9 @@ export default function BasicTabs (): JSX.Element {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <EventList events={eventsList3}/>
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <EventList events={eventsList4}/>
       </TabPanel>
     </div>
   )

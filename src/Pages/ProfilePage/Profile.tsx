@@ -24,13 +24,16 @@ export default function ProfileCard (): JSX.Element {
           <Typography gutterBottom variant="h5" component="div" className="flex">
             <Avatar sx={{ height: 80, width: 80 }}></Avatar>
             <div className='flex flex-col justify-around p-5'>
-            <Typography variant="h6" component="div">
-                John Doe
-            </Typography>
-            <Typography variant="body2" component="div">
-                Short Description
-            </Typography>
+              <Typography variant="h6" component="div">
+                  John Doe
+              </Typography>
+              <Typography variant="body2" component="div">
+                  Short Description
+              </Typography>
             </div>
+            <Button size="small" variant="contained" className='self-end p-5'>
+              Follow
+            </Button>
 
           </Typography>
           <Box sx={{ width: '100%', minHeight: '60vh' }}>
