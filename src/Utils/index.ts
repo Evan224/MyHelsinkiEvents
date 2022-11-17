@@ -14,4 +14,21 @@ function getMonthShortName(monthNo: number) {
   return date.toLocaleString("en-US", { month: "short" });
 }
 
-export { getMonthShortName, shuffle };
+function formatEvent(data) {
+  return data.map((event: any) => {
+    const DateCur = new Date(event.Date);
+    return {
+      picture: event.ThumbnailUrl,
+      title: event.Name,
+      date: {
+        month: DateCur.getUTCMonth(),
+        day: DateCur.getUTCDate(),
+      },
+      description: event.Description,
+      tags: event.Tags,
+      ...event,
+    };
+  });
+}
+
+export { formatEvent, getMonthShortName, shuffle };

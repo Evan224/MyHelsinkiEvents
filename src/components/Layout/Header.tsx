@@ -27,20 +27,26 @@ const menu = [
   {
     name: 'Profile',
     path: '/ProfilePage'
+  },
+  {
+    name: 'Manage',
+    path: '/managepage'
   }
 ]
 
+const getValueIndex= (path: string|boolean) => {
+  const index = menu.findIndex((item) => item.path === path)
+  if(index === -1) return false;
+  return index;
+}
 
 const Tabmenu = (): JSX.Element => {
   const location = useLocation()
-  const [value, setValue] = useState<number|boolean>(false);
+  const [value, setValue] = useState<number|boolean>(getValueIndex(location.pathname));
+
   useEffect(() => {
-    const newValue= menu.findIndex((item) => item.path === location.pathname)
-    if(newValue !== -1) {
-      setValue(value)
-    }else{
-      setValue(false)
-    }
+    const newValue=getValueIndex(location.pathname)
+    setValue(newValue)
   }, [location.pathname])
 
   const navigate = useNavigate()
@@ -84,7 +90,7 @@ export default function Header (): JSX.Element {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Welcome To Helsinki Events!
           </Typography>
-          <Tabmenu/>
+          <Tabmenu />
           <Avatar alt="Remy Sharp" src="" sx={{ width: 30, height: 30, marginRight: 2 }} />
           <Button color="inherit" sx={{
             display: login ? 'none' : 'block'

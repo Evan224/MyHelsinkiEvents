@@ -12,22 +12,7 @@ export default function useFetch (payload: Object, action: string) {
         payload,
         action
       })
-      const formattedEvents = result.data.map((event: any) => {
-        const DateCur = new Date(event.Date)
-        return {
-          picture: event.ThumbnailUrl,
-          title: event.Name,
-          date: {
-            month: DateCur.getUTCMonth(),
-            day: DateCur.getUTCDate()
-          },
-          description: event.Description,
-          tags: event.Tags,
-          ...event
-        }
-      })
-      // console.log(result.data, 'result.data')
-      setData(formattedEvents)
+      setData(result.data)
     }
     fetchData()
   }, [url])

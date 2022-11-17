@@ -6,6 +6,7 @@ import InformationPage from '../pages/InformationPage'
 import NotFoundPage from '../pages/NotFoundPage'
 import LoginPgae from '../pages/LoginPage'
 import ProfilePage from '../pages/ProfilePage'
+import ManagePage from '@/pages/ManagePage'
 import { redirect } from "react-router-dom";
 
 const homePageloader = async () => {
@@ -46,6 +47,10 @@ const path = [
   {
     path: '/ProfilePage',
     element: <ProfilePage />
+  },
+  {
+    path: '/managepage',
+    element: <ManagePage />
   },
   {
     path: '*',

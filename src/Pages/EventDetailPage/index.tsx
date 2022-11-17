@@ -5,13 +5,15 @@ import TitleInfo from './TitleInfo'
 import DetailCards from './DetailCards'
 import { useEffect,useMemo} from 'react'
 import LoadingSpinner from '@/components/LoadingSpinner'
+import {formatEvent} from '@/utils/index'
 // mock one data
 export default function EventDetail (): JSX.Element {
   const [events, setEvents] = useFetch({}, 'get-all-events')
 
   
   const randomEvent = useMemo(() => {
-    return shuffle(events)[0]
+    
+    return shuffle(formatEvent(events))[0]
   }, [events])
 
   if(!randomEvent) return (

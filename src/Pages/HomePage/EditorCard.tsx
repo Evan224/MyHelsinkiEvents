@@ -5,6 +5,8 @@ import Typography from '@mui/material/Typography'
 import EventImage from '@/assets/img/party-event.jpg'
 import { useState, useEffect } from 'react'
 import useFetch from '@/utils/hooks/useFetch'
+import {formatEvent} from '@/utils/index'
+
 
 function EditorCard (Props: Event.EventCardProps): JSX.Element {
   const { picture = EventImage, title, date, description } = Props
@@ -74,10 +76,11 @@ function EditorCard (Props: Event.EventCardProps): JSX.Element {
 
 const EditorCardList = (): JSX.Element => {
   const [events, setEvents] = useFetch({}, 'get-all-events')
+  const formattedEvents = formatEvent(events)
 
   return (
         <div className='flex w-4/5 mx-auto'>
-        {events.slice(0, 3).map((event, index) => (
+        {formattedEvents.slice(0, 3).map((event, index) => (
             <EditorCard key={index} {...event} />
         ))}
         </div>

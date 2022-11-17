@@ -55,7 +55,7 @@ export default function BasicInfo (): JSX.Element {
             }}
             className='flex w-4/5 justify-between'
             />
-        <div className='flex w-2/5 flex-wrap'>
+        <div className='flex flex-wrap'>
         {userInfo.tags.map((tag) => (
             <Chip label={tag} key={tag} className="p-4 m-4" />
         ))}
