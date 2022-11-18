@@ -27,7 +27,6 @@ interface MoreInfoDrawerProps {
 // Date, duration, location, picture, description, title, tags, FounderName, FounderDescription
 export default function MoreInfoDrawer(props: MoreInfoDrawerProps) {
     const {title, founder, founderDescription, duration, Location:location, description, picture, tags} = props
-    console.log(props)
   const [value, setValue] = useState<Dayjs | null>(null)
 
     return(

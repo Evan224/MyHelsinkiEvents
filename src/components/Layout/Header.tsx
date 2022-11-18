@@ -5,13 +5,18 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton'
 import EventIcon from '@mui/icons-material/Event'
-import { useEffect, useState } from 'react'
+import { useEffect, useState,useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Avatar from '@mui/material/Avatar'
 import Tabs from '@mui/material/Tabs'
 import LinkTab from '@mui/material/Tab'
+import { useAuth } from '@/Auth'
+import ConfirmBox from '../Confirm'
 
-const menu = [
+const title= 'Are you sure you want to logout?'
+const content="You can not get your personal recommendations if you logout."
+
+const menu= [
   {
     name: 'Home',
     path: '/homepage'
@@ -44,6 +49,17 @@ const Tabmenu = (): JSX.Element => {
   const location = useLocation()
   const [value, setValue] = useState<number|boolean>(getValueIndex(location.pathname));
 
+  const state=useAuth()
+  const newMenu = useMemo(() => {
+    if(state?.userType==="user"){
+      return menu.slice(0,4)
+    }else if(state?.userType==="admin"){
+      return menu
+    }else{
+      return menu.slice(0,3)
+    }
+  }, [state?.userType])
+
   useEffect(() => {
     const newValue=getValueIndex(location.pathname)
     setValue(newValue)
@@ -62,20 +78,39 @@ const Tabmenu = (): JSX.Element => {
   }
   return (
     <Tabs value={value} onChange={handleChange}>
-      {menu.map((item, index) => {
+      {newMenu.map((item, index) => {
         return (
-          <LinkTab key={item.path} href={item.path} label={item.name}/>
+          <LinkTab key={item.path} href={item.path} label={item.name} />
         )
       })}
     </Tabs>
   )
 }
 
+
+
 export default function Header (): JSX.Element {
   const navigate = useNavigate()
-  const [login, setLogin] = useState(false)
+  const state = useAuth();
+
+  const [open, setOpen] = useState(false);
+
+  const LogoutCallback = () => {
+    state?.handleLogout();
+    setOpen(false);
+  }
+
+  const handleClick=()=>{
+    if(state?.userType){
+      setOpen(true);
+    }else{
+      navigate('/loginpage')
+    }
+  }
+
   return (
     <Box sx={{ flexGrow: 1 }} className="w-full px-auto">
+      <ConfirmBox open={open} handleClose={LogoutCallback} title={title} content={content}></ConfirmBox>
       <AppBar position="static" color="transparent" >
         <Toolbar>
           <IconButton
@@ -91,10 +126,11 @@ export default function Header (): JSX.Element {
             Welcome To Helsinki Events!
           </Typography>
           <Tabmenu />
-          <Avatar alt="Remy Sharp" src="" sx={{ width: 30, height: 30, marginRight: 2 }} />
+          <Avatar alt="Remy Sharp" src="" sx={{ width: 30, height: 30, margin: 2 }} />
           <Button color="inherit" sx={{
-            display: login ? 'none' : 'block'
-          }} onClick={() => { navigate('/loginpage') }}>Login</Button>
+          }} onClick={() => {handleClick()}}>{
+            state?.userType ? 'Logout' : 'Login'
+          }</Button>
         </Toolbar>
       </AppBar>
     </Box>

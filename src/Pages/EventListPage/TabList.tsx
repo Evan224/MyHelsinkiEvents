@@ -8,10 +8,12 @@ import useFetch from '@/utils/hooks/useFetch'
 import { shuffle } from '@/utils'
 import {formatEvent} from '@/utils/index'
 import { useEffect,useState,useMemo} from 'react'
+import { useAuth } from '@/Auth'
 
 export default function BasicTabs (): JSX.Element {
   const [value, setValue] = useState(0)
   const [events, setEvents] = useFetch({}, 'get-all-events')
+  const state=useAuth();
   const formattedEvents = useMemo(() => {
     return formatEvent(events)
   }, [events])
@@ -25,7 +27,18 @@ export default function BasicTabs (): JSX.Element {
   const eventsList3 = formattedEvents.slice(3, 8)
   const eventsList4 = formattedEvents.slice(3, 7)
 
-
+  const LoginPanel = (
+           <>
+                  <TabPanel value={value} index={1}>
+                            <EventList events={eventsList2}/>
+                        </TabPanel>
+                        <TabPanel value={value} index={2}>
+                          <EventList events={eventsList3}/>
+                        </TabPanel>
+                        <TabPanel value={value} index={3}>
+                          <EventList events={eventsList4}/>
+                        </TabPanel>
+               </>)
   return (
     <div className='w-full'>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '80%' }} className="mx-auto">
@@ -39,15 +52,7 @@ export default function BasicTabs (): JSX.Element {
       <TabPanel value={value} index={0} >
         <EventList events={eventsList1}/>
       </TabPanel>
-      <TabPanel value={value} index={1}>
-         <EventList events={eventsList2}/>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <EventList events={eventsList3}/>
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <EventList events={eventsList4}/>
-      </TabPanel>
+      {state?.userType?LoginPanel:null}
     </div>
   )
 }

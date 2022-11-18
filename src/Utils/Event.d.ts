@@ -15,3 +15,10 @@ declare namespace Event {
     cssStyle?: string;
   }
 }
+
+declare namespace User {
+  export enum UserRole {
+    User = 1,
+    ADMIN = 2,
+  }
+}

@@ -12,8 +12,10 @@ import Grid from '@mui/material/Grid'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { useState } from 'react'
-import { useLocation} from 'react-router-dom'
+import { useState,useContext} from 'react'
+import { useLocation,useNavigate} from 'react-router-dom'
+import { useAuth } from '@/Auth'
+
 
 const theme = createTheme()
 
@@ -21,15 +23,28 @@ export default function SignInSide (): JSX.Element {
   // react Router params
   const location = useLocation()
   const [formState, setFormState] = useState(location.state?.formState||'login' )
+  const state=useAuth();
+  const navigate=useNavigate();
 
-  // const [formState, setFormState] = useState<'login' | 'sign'>(state as 'login' | 'sign')
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get('email'),
-      password: data.get('password')
-    })
+    const email = data.get('email')?.toString()||""
+    const password = data.get('password')?.toString()||""
+    if(!state){
+      return;
+    }
+    if(formState==='login'){
+      const status=state.handleLogin(email,password)
+      if(status){
+        navigate('/')
+      }
+    }else if(formState==='signup'){
+      const status=state.handleSignUp(email,password);
+      if(status){
+        navigate('/')
+      }
+    }
   }
 
   return (

@@ -8,15 +8,15 @@ import LoginPgae from '../pages/LoginPage'
 import ProfilePage from '../pages/ProfilePage'
 import ManagePage from '@/pages/ManagePage'
 import { redirect } from "react-router-dom";
+import {
+  createBrowserRouter
+} from 'react-router-dom'
+import Layout from '@/components/Layout'
 
 const homePageloader = async () => {
   return redirect("/homepage");
 };
 
-import {
-  createBrowserRouter
-} from 'react-router-dom'
-import Layout from '@/components/Layout'
 
 const path = [
   {
