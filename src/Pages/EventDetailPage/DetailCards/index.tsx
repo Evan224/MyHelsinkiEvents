@@ -10,21 +10,21 @@ import FounderCard from './FounderCard'
 import ParticipatantsCard from './ParticipatantsCard'
 
 
-export default function DetailCards (): JSX.Element {
+export default function DetailCards (props): JSX.Element {
   return (
     <div className='w-4/5 mx-auto'>
             <Grid container spacing={2}>
             <Grid item xs={6} md={7}>
-                  <GeneralCard />
+                  <GeneralCard {...props}/>
             </Grid>
             <Grid item xs={6} md={5}>
-                  <FounderCard />
+                  <FounderCard {...props}/>
             </Grid>
             <Grid item xs={6} md={7}>
-                  <ParticipatantsCard />
+                  <ParticipatantsCard {...props}/>
             </Grid>
             <Grid item xs={6} md={5} className="h-40 w-40">
-            {/* <SimpleMap /> */}
+
             </Grid>
             </Grid>
     </div>

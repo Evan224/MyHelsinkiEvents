@@ -5,4 +5,4 @@ dotenv.config();
 const { API_URL } = process.env;
 
 axios.defaults.baseURL = API_URL;
-axios.defaults.headers.post["x-mock-match-request-body"] = true;
+axios.defaults.headers.common["x-mock-match-request-body"] = true;

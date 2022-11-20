@@ -10,7 +10,23 @@ const getEvents = async (action: string, payload: any) => {
   return result.data;
 };
 
-export { getEvents };
+const likeEvent = async (eventId: string) => {
+  const result = await getEvents("/event", {
+    payload: { eventId },
+    action: "like-event",
+  });
+  return result;
+};
+
+const joinEvent = async (eventId: string) => {
+  const result = await getEvents("/event", {
+    payload: { eventId },
+    action: "join-event",
+  });
+  return result;
+};
+
+export { getEvents, joinEvent, likeEvent };
 
 // id: number;
 // owner: string;

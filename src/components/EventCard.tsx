@@ -34,7 +34,7 @@ export default function EventCard (props: Event.EventCardProps): JSX.Element {
         height: '10rem',
         padding: '1rem'
       }} onClick={e => { navigate('/eventdetail',{
-        state:props
+        state:props.id,
       }) }}>
         <div className='flex justify-between'>
           <Typography gutterBottom variant="h6" component="div">

@@ -2,23 +2,25 @@
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
+import Chip from '@mui/material/Chip'
 
-
-export default function ParticipantCard (): JSX.Element {
+export default function ParticipantCard (props): JSX.Element {
+    const {likes,tags,description} = props;
     return (
         <Card >
         <CardContent>
                     <Typography variant='h5' gutterBottom>
-                    200 people have joined this event
+                    {likes} people have liked this event
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    Music, Food, Drinks, and more
-                    </Typography>
+                    {/* <Typography sx={{ mb: 1.5 }} color="text.secondary"> */}
+                    <div>
+                        {tags.map((tag) => {
+                           return <Chip label={tag.name} key={tag.id}/>
+                        })}
+                    </div>
+                    {/* </Typography> */}
                     <Typography variant="body1">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio unde repellat aliquid blanditiis recusandae et possimus quasi ducimus dolores totam! Repudiandae facere expedita deserunt perspiciatis optio, reiciendis dolor unde?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur vel, mollitia sed officia quis neque suscipit esse dolore deserunt provident.
-                    <br />
-                    {'"a benevolent smile"'}
+                    {description}
                     </Typography>
         </CardContent>
         </Card>
