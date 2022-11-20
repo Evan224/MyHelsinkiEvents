@@ -4,7 +4,7 @@ import TagBar from '../../components/TagBar'
 import Title from './Title'
 import DatePicker from './DatePicker'
 import TabList from './TabList'
-import { useEffect, useReducer } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 
 const initialState = {
   tags:[],
@@ -45,9 +45,9 @@ const reducer = (state:StateProps, action:ActionProps) => {
 export default function EventListPage (): JSX.Element {
   // tags, date, search
   const [state, dispatch] = useReducer(reducer, initialState)
+  const [payload, setPayload] = useState({})
   const callBackSearch = (value:string) => {
-    // console.log(state)
-    //todo Get data from backend
+    setPayload(state)
   }
 
   return (
@@ -64,7 +64,7 @@ export default function EventListPage (): JSX.Element {
           }}/>
         </div>
       </div>
-        <TabList />
+        <TabList payload={payload}/>
         {/* <EventList events={tests}/> */}
     </div>
   )

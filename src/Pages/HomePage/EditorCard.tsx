@@ -43,39 +43,9 @@ function EditorCard (Props: Event.EventCardProps): JSX.Element {
   )
 }
 
-// const mockingEvents: EventCardProps[] = [
-//   {
-//     picture: 'https://source.unsplash.com/random',
-//     title: 'this is title this is a vry very asdasda',
-//     date: {
-//       month: 'Aug',
-//       day: '12'
-//     },
-//     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
-//   },
-//   {
-//     picture: 'https://source.unsplash.com/random',
-//     title: 'this is title this is a vry very asdasda',
-//     date: {
-//       month: 'Aug',
-//       day: '12'
-//     },
-//     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
-//   },
-//   {
-//     picture: 'https://source.unsplash.com/random',
-//     title: 'this is title this is a vry very asdasda',
-//     date: {
-//       month: 'Aug',
-//       day: '12'
-//     },
-//     description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?'
-//   }
-
-// ]
 
 const EditorCardList = (): JSX.Element => {
-  const [events, setEvents] = useFetch({}, 'get-all-events')
+  const [events, setEvents] = useFetch({}, 'get-recommendation-events')
   const formattedEvents = formatEvent(events)
 
   return (

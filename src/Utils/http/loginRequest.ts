@@ -5,10 +5,11 @@ const userLogin = async (email: string, password: string) => {
     email,
     password,
   };
-  const response = await axios.post("/", {
+  const params = {
     action: "post-user-login",
     payload,
-  });
+  };
+  const response = await axios.post("/login", JSON.stringify(params));
   if (response.status === 200) {
     return response.data;
   } else {
@@ -21,7 +22,7 @@ const userSignup = async (email: string, password: string) => {
     email,
     password,
   };
-  const response = await axios.post("/", {
+  const response = await axios.post("/login", {
     action: "post-user-signup",
     payload,
   });

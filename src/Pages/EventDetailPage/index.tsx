@@ -6,25 +6,22 @@ import DetailCards from './DetailCards'
 import { useEffect,useMemo} from 'react'
 import LoadingSpinner from '@/components/LoadingSpinner'
 import {formatEvent} from '@/utils/index'
+import {useLocation} from 'react-router-dom'
 // mock one data
 export default function EventDetail (): JSX.Element {
-  const [events, setEvents] = useFetch({}, 'get-all-events')
+  const location = useLocation();
+  const { state } = location;
 
-  
-  const randomEvent = useMemo(() => {
-    
-    return shuffle(formatEvent(events))[0]
-  }, [events])
 
-  if(!randomEvent) return (
+  if(!state) return (
     <LoadingSpinner />
   )
   return (
         <div className="flex justify-center w-[100vw]">
             <div className="background">
-                <img src={randomEvent.picture} className="object-cover h-[30vh] w-full">
+                <img src={state.picture} className="object-cover h-[30vh] w-full">
                 </img>
-                <TitleInfo {...randomEvent} />
+                <TitleInfo {...state} />
                 <DetailCards />
             </div>
         </div>

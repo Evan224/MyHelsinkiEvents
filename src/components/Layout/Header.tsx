@@ -95,8 +95,10 @@ export default function Header (): JSX.Element {
 
   const [open, setOpen] = useState(false);
 
-  const LogoutCallback = () => {
-    state?.handleLogout();
+  const LogoutCallback = (ifLogout) => {
+    if(ifLogout){
+      state?.handleLogout();
+    }
     setOpen(false);
   }
 

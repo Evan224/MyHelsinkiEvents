@@ -14,6 +14,21 @@ declare namespace Event {
     events: EventCardProps[];
     cssStyle?: string;
   }
+
+  export interface EventType {
+    id: number;
+    owner: string;
+    title: string;
+    description: string;
+    picture: string;
+    tags: string[];
+    date: string;
+    founder: string;
+    founderDescription: string;
+    location: string;
+    duration: string;
+    likes: number;
+  }
 }
 
 declare namespace User {

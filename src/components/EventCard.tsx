@@ -9,9 +9,9 @@ import { height } from '@mui/system'
 import { getMonthShortName } from '@/utils'
 
 
-export default function EventCard (Props: Event.EventCardProps): JSX.Element {
+export default function EventCard (props: Event.EventCardProps): JSX.Element {
   const navigate = useNavigate()
-  const { picture, title, date, description } = Props
+  const { picture, title, date, description } = props
   const { month, day } = date
   return (
     <div className='w-1/3'>
@@ -33,7 +33,9 @@ export default function EventCard (Props: Event.EventCardProps): JSX.Element {
       <CardContent className='flex flex-col hover:bg-gray-100' sx={{
         height: '10rem',
         padding: '1rem'
-      }} onClick={e => { navigate('/eventdetail') }}>
+      }} onClick={e => { navigate('/eventdetail',{
+        state:props
+      }) }}>
         <div className='flex justify-between'>
           <Typography gutterBottom variant="h6" component="div">
             {title}

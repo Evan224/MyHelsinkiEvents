@@ -16,7 +16,7 @@ export default function HomePage (): JSX.Element {
         <div className="flex justify-center w-[100vw] flex-col">
             <FindEvent show={state?.userType}/>
             <Title title="Upcoming Events" />
-            <EventList events={formatEvent(events)}/>
+            <EventList events={formatEvent(events.slice(0,9))}/>
             <LoadMore />
             <CreateEvent />
             <Title title="Daily Recommendation" />
