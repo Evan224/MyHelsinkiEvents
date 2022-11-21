@@ -12,10 +12,10 @@ export default function EventDetail (): JSX.Element {
   const location = useLocation();
   // console.log(location.state)
   const [state, setState] = useFetch({id:location.state},'get-event-detail',location.state)
-  console.log(state,'state')
   if(!state[0]) return (
-    <LoadingSpinner />
+       <LoadingSpinner cssString="h-[100vh]" />
   )
+
   return (
         <div className="flex justify-center w-[100vw]">
             <div className="background">

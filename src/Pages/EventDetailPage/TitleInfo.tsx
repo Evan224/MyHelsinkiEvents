@@ -3,6 +3,8 @@ import Button from '@mui/material/Button'
 import {useState} from 'react'
 import {joinEvent,likeEvent} from '@/utils/http/eventRequest'
 import ConfirmBox from '@/components/Confirm'
+import {useAuth} from '@/Auth'
+import {useNavigate} from 'react-router-dom'
 
 interface TitleProps {
   title: string
@@ -15,9 +17,18 @@ export default function TitleInfo (props:any): JSX.Element {
   const {location,id} = props;
   const [ifliked,setIfliked] = useState(props.ifliked);
   const [ifjoined,setIfjoined] = useState(props.ifjoined);
+  const navigate = useNavigate();
+
+  const state=useAuth();
   const DateStirng = new Date(props.Date).toLocaleDateString(options)
 
+
   const handleLike = async () => {
+    if(!state?.userType){
+      navigate('/loginpage');
+      return;
+    }
+
     const res = await likeEvent(id);
     if(res){
       setIfliked(!ifliked);
@@ -25,6 +36,10 @@ export default function TitleInfo (props:any): JSX.Element {
   }
 
   const handleJoin = async () => {
+    if(!state?.userType){
+      navigate('/loginpage');
+      return;
+    }
     const res = await joinEvent(id);
     if(res){
       setIfjoined(!ifjoined);
@@ -38,7 +53,7 @@ export default function TitleInfo (props:any): JSX.Element {
             <Typography variant="h4" className="">
                 {props.title}
             </Typography>
-            <Typography variant="body2" className='py-2 flex w-full justify-between'>
+            <div  className='py-2 flex w-full justify-between'>
                 {location}
                 <p></p>
                 <p></p>
@@ -48,7 +63,7 @@ export default function TitleInfo (props:any): JSX.Element {
                 <Button variant={ifjoined?"contained":"outlined"} color="primary" 
                 className="w-1/6 self-end" onClick={()=>{handleJoin()}}>
                         {ifjoined?"joined!":"join"}</Button>
-            </Typography>
+            </div>
         </div>
   )
 }

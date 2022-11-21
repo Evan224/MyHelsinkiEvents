@@ -7,7 +7,7 @@ import Chip from '@mui/material/Chip'
 export default function ParticipantCard (props): JSX.Element {
     const {likes,tags,description} = props;
     return (
-        <Card >
+        <Card>
         <CardContent>
                     <Typography variant='h5' gutterBottom>
                     {likes} people have liked this event
@@ -19,7 +19,7 @@ export default function ParticipantCard (props): JSX.Element {
                         })}
                     </div>
                     {/* </Typography> */}
-                    <Typography variant="body1">
+                    <Typography variant="body1" className="py-4">
                     {description}
                     </Typography>
         </CardContent>

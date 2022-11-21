@@ -12,7 +12,7 @@ import ParticipatantsCard from './ParticipatantsCard'
 
 export default function DetailCards (props): JSX.Element {
   return (
-    <div className='w-4/5 mx-auto'>
+    <div className='w-4/5 mx-auto py-4'>
             <Grid container spacing={2}>
             <Grid item xs={6} md={7}>
                   <GeneralCard {...props}/>

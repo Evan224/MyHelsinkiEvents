@@ -7,9 +7,11 @@ import EditorCardList from './EditorCard'
 import { formatEvent } from '@/utils'
 import useFetch from '@/utils/hooks/useFetch'
 import { useAuth } from '@/Auth'
+import LoadingSpinner from '@/components/LoadingSpinner'
 
 export default function HomePage (): JSX.Element {
-  const [events, setEvents] = useFetch({}, 'get-all-events')
+  const [events, setEvents] = useFetch({}, 'get-all-events', 'events')
+  // const events=[]
   const state=useAuth();
 
   return (
@@ -20,7 +22,8 @@ export default function HomePage (): JSX.Element {
             <LoadMore />
             <CreateEvent />
             <Title title="Daily Recommendation" />
-            <EditorCardList />
+            <EditorCardList />:<LoadingSpinner cssString="h-[30vh]"/>
+            
         </div>
   )
 }

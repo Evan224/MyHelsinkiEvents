@@ -15,7 +15,7 @@ export default function BasicTabs (props): JSX.Element {
   const [value, setValue] = useState(0)
   const [recommendEvents, setEvents] = useFetch({}, 'get-all-events')
   const [likesEvents, setLikesEvents] = useFetch(payload, 'get-likes-events',payload)
-  const [myEvents, setMyEvents] = useFetch(payload, 'get-my-events',payload)
+  const [joinedEvents, setMyEvents] = useFetch(payload, 'get-join-events',payload)
   const [followingEvents, setFollowingEvents] = useFetch(payload, 'get-following-events',payload)
 
 
@@ -28,11 +28,11 @@ export default function BasicTabs (props): JSX.Element {
 
   const LoginPanel = (
            <>
-                  <TabPanel value={value} index={1}>
-                            <EventList events={formatEvent(likesEvents)}/>
+                <TabPanel value={value} index={1}>
+                        <EventList events={formatEvent(likesEvents)}/>
                         </TabPanel>
                         <TabPanel value={value} index={2}>
-                          <EventList events={formatEvent(myEvents)}/>
+                          <EventList events={formatEvent(joinedEvents)}/>
                         </TabPanel>
                         <TabPanel value={value} index={3}>
                           <EventList events={formatEvent(followingEvents)}/>
@@ -44,14 +44,14 @@ export default function BasicTabs (props): JSX.Element {
     <div className='w-full'>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '80%' }} className="mx-auto">
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Recommend" />
-          <Tab label="My likes" sx={{
+          <Tab label="Recommend" sx={{display:"block"}}/>
+          <Tab label="likes" sx={{
             display: state?.userType ? 'block' : 'none'
           }}/>
-          <Tab label="My own" sx={{
+          <Tab label="joined Events" sx={{
             display: state?.userType ? 'block' : 'none'
           }}/>
-          <Tab label="My Follow" sx={{
+          <Tab label="Following" sx={{
             display: state?.userType ? 'block' : 'none'
           }}/>
         </Tabs>

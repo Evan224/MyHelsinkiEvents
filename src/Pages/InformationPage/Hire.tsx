@@ -10,7 +10,7 @@ export default function Hire (): JSX.Element {
             <Typography variant="h6" component="div" sx={{
               color: 'text.secondary'
             }} className="flex justify-center items-center" >
-            Work hard with highly motivated team of talented people and great teammates to launch
+            Work hard with highly motivated team of talented people to launch
                 perfectly crafted
             </Typography>
             <Typography variant="h6" component="div" sx={{
