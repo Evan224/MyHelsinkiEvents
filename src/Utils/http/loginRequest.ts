@@ -1,15 +1,16 @@
 import axios from "axios";
 
-const userLogin = async (email: string, password: string) => {
-  const payload = {
-    email,
-    password,
-  };
+interface LoginPayload {
+  password: string;
+  username: string;
+}
+
+const userLogin = async (payload: LoginPayload) => {
   const params = {
-    action: "post-user-login",
+    action: "login",
     payload,
   };
-  const response = await axios.post("/login", JSON.stringify(params));
+  const response = await axios.post("/auth", params);
   if (response.status === 200) {
     return response.data;
   } else {
@@ -17,15 +18,18 @@ const userLogin = async (email: string, password: string) => {
   }
 };
 
-const userSignup = async (email: string, password: string) => {
-  const payload = {
-    email,
-    password,
-  };
-  const response = await axios.post("/login", {
-    action: "post-user-signup",
+interface SignupPayload {
+  email: string;
+  password: string;
+  username: string;
+}
+
+const userSignup = async (payload: SignupPayload) => {
+  const response = await axios.post("/auth", {
+    action: "sign-up",
     payload,
   });
+  console.log(response, "response");
   if (response.status === 200) {
     return response.data;
   } else {

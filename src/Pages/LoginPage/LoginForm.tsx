@@ -26,23 +26,27 @@ export default function SignInSide (): JSX.Element {
   const state=useAuth();
   const navigate=useNavigate();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit =async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     const email = data.get('email')?.toString()||""
+    const username = data.get('username')?.toString()||""
     const password = data.get('password')?.toString()||""
+    const confirm= data.get('confirm')?.toString()||""
     if(!state){
       return;
     }
     if(formState==='login'){
-      const status=state.handleLogin(email,password)
+      const status=await state.handleLogin(username,password)
       if(status){
         navigate('/')
       }
-    }else if(formState==='signup'){
-      const status=state.handleSignUp(email,password);
-      if(status){
-        navigate('/')
+    }else if(formState==='sign'){
+      if(password===confirm){
+        const status=await state.handleSignUp(email,username,password)
+        if(status){
+          setFormState('login')
+        }
       }
     }
   }
@@ -85,6 +89,17 @@ export default function SignInSide (): JSX.Element {
               {formState === 'login' ? 'Log in' : 'Sign up'}
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="username"
+                label="username"
+                name="username"
+                autoComplete="username"
+                autoFocus
+                
+              />
               <TextField
                 margin="normal"
                 required
@@ -94,6 +109,9 @@ export default function SignInSide (): JSX.Element {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                sx={{
+                  display: formState === 'sign' ? '' : 'none'
+                }}
               />
               <TextField
                 margin="normal"

@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography'
 
 
 export default function GeneralCard (props:any): JSX.Element {
-    const {description,duration,location,joinNumber,founder} = props
+    const {LikedUsers,Owner,location,endTime} = props
     return (
         <Card >
             <CardContent>
@@ -13,16 +13,16 @@ export default function GeneralCard (props:any): JSX.Element {
                             Summary
                         </Typography>
                         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        {joinNumber} joint this event
+                        {LikedUsers.length} has liked this event !
                         </Typography>
                         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                        {founder} has started this event
+                        {Owner.username} has started this event
                         </Typography>
                         <Typography sx={{ mb: 1.5 }} color="text.secondary">
                             Location: {location}
                         </Typography>
                         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            Duration : {duration} hours
+                            End Time : {endTime}
                         </Typography>
                         {/* <Typography variant="body1">
                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio unde repellat aliquid blanditiis recusandae et possimus quasi ducimus dolores totam! Repudiandae facere expedita deserunt perspiciatis optio, reiciendis dolor unde?

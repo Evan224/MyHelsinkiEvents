@@ -5,16 +5,22 @@ import Typography from '@mui/material/Typography'
 
 
 export default function FounderCard (props): JSX.Element {
-    const {founder,founderDescription} = props
+    const {Owner} = props
+    console.log(
+        Owner
+    )
     return (
         <Card >
         <CardContent>
+                    <div className='w-1/2 mx-auto p-4'>
+                        <img src={Owner.avatarUrl}></img>
+                    </div>
                     <Typography variant='h5' gutterBottom>
-                        {founder}
+                        {Owner.username}
                     </Typography>
 
                     <Typography variant="body1">
-                        {founderDescription}
+                        {Owner.introduction}
                     </Typography>
         </CardContent>
         </Card>

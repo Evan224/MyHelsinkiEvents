@@ -1,4 +1,49 @@
 declare namespace Event {
+  export interface IEvent {
+    id: number;
+    ownerId: number;
+    name: string;
+    startTime: string;
+    endTime: string;
+    location: string;
+    thumbnailUrl: string;
+    description: string;
+    visibility: number;
+    createdAt: string;
+    updatedAt: string;
+
+    // Expand fields
+    Tags: ITag[];
+    Owner: IUser;
+  }
+
+  interface IUser {
+    id: number;
+    username: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    birthday: string;
+    email: string;
+    avatarUrl: string;
+    introduction: string;
+    status: number;
+    createdAt: string;
+    updatedAt: string;
+
+    // Expand fields
+    Events: IEvent[];
+  }
+
+  interface ITag {
+    id: number;
+    name: string;
+    eventId: number;
+
+    // Expand fields
+    Event: IEvent;
+  }
+
   export interface EventCardProps {
     picture?: string;
     title: string;

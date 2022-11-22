@@ -5,16 +5,17 @@ import Typography from '@mui/material/Typography'
 import Chip from '@mui/material/Chip'
 
 export default function ParticipantCard (props): JSX.Element {
-    const {likes,tags,description} = props;
+    console.log(props)
+    const {LikedUsers,Tags,description} = props
     return (
         <Card>
         <CardContent>
                     <Typography variant='h5' gutterBottom>
-                    {likes} people have liked this event
+                    {LikedUsers.length} people have liked this event
                     </Typography>
                     {/* <Typography sx={{ mb: 1.5 }} color="text.secondary"> */}
-                    <div>
-                        {tags.map((tag) => {
+                    <div className='w-1/2'>
+                        {Tags.map((tag) => {
                            return <Chip label={tag.name} key={tag.id}/>
                         })}
                     </div>

@@ -9,14 +9,15 @@ import { shuffle } from '@/utils'
 import {formatEvent} from '@/utils/index'
 import { useEffect,useState,useMemo} from 'react'
 import { useAuth } from '@/Auth'
+import { getAlljoinedEvents,getMylikedEvents,getRecommendedEvents,getFollowerEvents } from '@/utils/http/eventRequest'
 
 export default function BasicTabs (props): JSX.Element {
   const {payload} = props;
   const [value, setValue] = useState(0)
-  const [recommendEvents, setEvents] = useFetch({}, 'get-all-events')
-  const [likesEvents, setLikesEvents] = useFetch(payload, 'get-likes-events',payload)
-  const [joinedEvents, setMyEvents] = useFetch(payload, 'get-join-events',payload)
-  const [followingEvents, setFollowingEvents] = useFetch(payload, 'get-following-events',payload)
+  const [recommendEvents, setEvents] = useFetch(getRecommendedEvents,{})
+  const [likesEvents, setLikesEvents] = useFetch(getMylikedEvents,{})
+  const [joinedEvents, setMyEvents] = useFetch(getAlljoinedEvents,{})
+  const [followingEvents, setFollowingEvents] = useFetch(getFollowerEvents,{})
 
 
   const state=useAuth();
@@ -29,13 +30,13 @@ export default function BasicTabs (props): JSX.Element {
   const LoginPanel = (
            <>
                 <TabPanel value={value} index={1}>
-                        <EventList events={formatEvent(likesEvents)}/>
+                        <EventList events={likesEvents}/>
                         </TabPanel>
                         <TabPanel value={value} index={2}>
-                          <EventList events={formatEvent(joinedEvents)}/>
+                          <EventList events={joinedEvents}/>
                         </TabPanel>
                         <TabPanel value={value} index={3}>
-                          <EventList events={formatEvent(followingEvents)}/>
+                          <EventList events={followingEvents}/>
                         </TabPanel>
                </>)
 
@@ -57,7 +58,7 @@ export default function BasicTabs (props): JSX.Element {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} >
-        <EventList events={formatEvent(recommendEvents)}/>
+        <EventList events={recommendEvents}/>
       </TabPanel>
       {state?.userType?LoginPanel:null}
     </div>

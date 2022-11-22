@@ -1,24 +1,31 @@
 import { createContext,useState,useContext } from "react";
 import { userSignup,userLogin } from "./utils/http/loginRequest";
+import axios from "axios";
 
 interface IAuthContext {
     userType: null|"admin"|"user";
-    handleLogin: (email:string,password:string)=>Promise<boolean>;
+    handleLogin: (username:string,password:string)=>Promise<boolean>;
     handleLogout: ()=>void;
-    handleSignUp: (email:string,password:string)=>Promise<boolean>;
+    handleSignUp: (email:string,username:string,password:string)=>Promise<boolean>;
 }
 
 const AuthContext = createContext<IAuthContext|null>(null);
 
 const AuthProvider = ({ children }) => {
     const init=localStorage.getItem("userType")||null;
+    const token=localStorage.getItem("token")||null;
+    axios.defaults.headers.common['Authorization'] =token;
     const [userType, setUserType] = useState<null|"admin"|"user">(init as null|"admin"|"user");
 
-    const handleLogin=async (email:string,password:string)=>{
-        const data=await userLogin(email,password);
-        if(data.success){
-            setUserType(data.userType);
-            localStorage.setItem("userType",data.userType);
+    const handleLogin=async (username:string,password:string)=>{
+        const body=await userLogin({username,password})
+        const {data} = body;
+        if(data.token){
+            setUserType("user");
+            axios.defaults.headers.common['Authorization'] =data.token;
+            localStorage.setItem("userType","user");
+            localStorage.setItem("id",data.user.id);
+            localStorage.setItem("token",data.token);
             return true;
         }else{
             return false;
@@ -26,15 +33,20 @@ const AuthProvider = ({ children }) => {
     }
 
     const handleLogout=()=>{
+        localStorage.removeItem("id");
+        localStorage.removeItem("token");
         localStorage.removeItem("userType");
         setUserType(null)
     }
 
-    const handleSignUp=async (email:string,password:string)=>{
-        const data=await userSignup(email,password);
-        if(data.success){
-            setUserType(data.userType);
-            localStorage.setItem("userType",data.userType);
+    const handleSignUp=async (email:string,username:string,password:string,)=>{
+        const body=await userSignup({
+            email,
+            password,
+            username
+        });
+        const {data} = body;
+        if(data.msg){
             return true;
         }else{
             return false;

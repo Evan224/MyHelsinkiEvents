@@ -18,16 +18,13 @@ interface Profile {
   location: string;
 }
 
-const getProfile = async (userId: String = "") => {
-  const response = await axios.post("/profile", {
-    action: "get-profile",
-    payload: {
-      userId,
-    },
+const getProfile = async () => {
+  const response = await axios.post("/me", {
+    action: "get-my-profile",
+    payload: {},
   });
 
-  //   console.log(getProfile);
-  return response.data;
+  return response;
 };
 
 const editProfile = async (profile: Profile) => {

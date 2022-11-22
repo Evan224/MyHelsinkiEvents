@@ -16,8 +16,8 @@ interface UserInfoProps {
   likedEvents: number
 }
 
-export default function BasicInfo (): JSX.Element {
-  const [userInfo, setUserInfo] = useState<UserInfoProps>(mockUserInfo)
+export default function BasicInfo (props): JSX.Element {
+
   return (
         <Box
         component="form"
@@ -28,37 +28,39 @@ export default function BasicInfo (): JSX.Element {
         noValidate
         autoComplete="off"
       >
-        <List sx={{}} className="flex flex-row w-2/5">
-            <ListItemText primary="following" secondary={userInfo.following} />
-            <ListItemText primary="followers" secondary={userInfo.followers} />
-            <ListItemText primary="Likes" secondary={userInfo.likedEvents} />
+        <List sx={{}} className="flex flex-row w-3/5">
+            <ListItemText primary="following" secondary={props.totalFollowingUsers} />
+            <ListItemText primary="followers" secondary={props.totalFollowedByUsers} />
+            <ListItemText primary="Likes" secondary={props.totalLikedEvents} />
+            <ListItemText primary="joins" secondary={props.totalJoinedEvents} />
+
         </List>
         <div className='flex w-4/5 justify-between'>
         <TextField id="outlined-read-only-input"
           label="Name"
-          defaultValue={userInfo.name}
+          defaultValue={props.firstName}
           InputProps={{
             readOnly: true
           }}/>
         <TextField id="outlined-read-only-input2"
           label="email"
-          defaultValue={userInfo.email}
+          defaultValue={props.email}
           InputProps={{
             readOnly: true
           }}/>
         </div>
         <TextField id="outlined-read-only-input3"
             label="position"
-            defaultValue={userInfo.position}
+            defaultValue={props.shortIntroduction}
             InputProps={{
               readOnly: true
             }}
             className='flex w-4/5 justify-between'
             />
         <div className='flex flex-wrap'>
-        {userInfo.tags.map((tag) => (
+        {/* {props.tags.map((tag) => (
             <Chip label={tag} key={tag} className="p-4 m-4" />
-        ))}
+        ))} */}
         </div>
         {/* <TextField id="outlined-read-only-input4"
             label="tags"
@@ -71,7 +73,7 @@ export default function BasicInfo (): JSX.Element {
                       multiline
                       rows={4}
             label="description"
-            defaultValue={userInfo.description}
+            defaultValue={props.introduction}
             InputProps={{
               readOnly: true
             }}
@@ -82,13 +84,4 @@ export default function BasicInfo (): JSX.Element {
   )
 }
 
-const mockUserInfo: UserInfoProps = {
-  name: 'John Doe',
-  email: 'No email',
-  position: 'software engineer',
-  tags: ['music', 'sports', 'food'],
-  description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut hic quis incidunt praesentium explicabo quia id soluta deleniti dolore non?',
-  followers: 100,
-  following: 20,
-  likedEvents: 10
-}
+

@@ -5,7 +5,8 @@ import Typography from '@mui/material/Typography'
 import EventImage from '@/assets/img/party-event.jpg'
 import { useState, useEffect } from 'react'
 import useFetch from '@/utils/hooks/useFetch'
-import {formatEvent} from '@/utils/index'
+import EventCard from '@/components/EventCard'
+import {getEditorEvents} from '@/utils/http/eventRequest'
 
 
 function EditorCard (Props: Event.EventCardProps): JSX.Element {
@@ -45,13 +46,19 @@ function EditorCard (Props: Event.EventCardProps): JSX.Element {
 
 
 const EditorCardList = (): JSX.Element => {
-  const [events, setEvents] = useFetch({}, 'get-recommendation-events')
-  const formattedEvents = formatEvent(events)
+  const [events, setEvents] = useState<Event.IEvent[]>([])
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const { data } = await getEditorEvents()
+      setEvents(data)
+    }
+    fetchEvents()
+  }, [])
 
   return (
         <div className='flex w-4/5 mx-auto'>
-        {formattedEvents.slice(0, 3).map((event, index) => (
-            <EditorCard key={index} {...event} />
+        {events.slice(0, 3).map((event, index) => (
+            <EventCard key={index} {...event} />
         ))}
         </div>
   )

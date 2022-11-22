@@ -5,20 +5,13 @@ import { getProfile } from '@/utils/http/profileRequest'
 import {useEffect,useState} from 'react'
 import {useLocation} from 'react-router-dom'
 import LoadingSpinner from '@/components/LoadingSpinner'
+import useFetch from '@/utils/hooks/useFetch'
 
 export default function Profile (): JSX.Element {
   const location = useLocation();
   const userId=location?.state?.id ?? "";
-  const [profile,setProfile]=useState(null);
-  console.log(profile,'profile')
-  
-  useEffect(()=>{
-    const getUserFunc=async ()=>{
-      const res = await getProfile(userId)
-      setProfile(res)
-    }
-    getUserFunc()
-  },[userId])
+  const [profile, setProfile] = useFetch(getProfile,{})
+  console.log(profile)
 
   if(!profile) return (
     <LoadingSpinner cssString="h-[80vh]" />
@@ -27,7 +20,7 @@ export default function Profile (): JSX.Element {
   return (
         <div className="flex justify-center w-[100vw] flex-col items-center">
           <PicCard />
-          <ProfileCard />
+          <ProfileCard {...profile}/>
         </div>
   )
 }

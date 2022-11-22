@@ -12,7 +12,7 @@ import SettingsForm from './SettingsPage'
 import MyEventList from './MyEventList'
 import EventList from '@/components/EventList'
 
-export default function ProfileCard (): JSX.Element {
+export default function ProfileCard (props): JSX.Element {
   const [value, setValue] = React.useState(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
@@ -22,13 +22,13 @@ export default function ProfileCard (): JSX.Element {
     <Card sx={{ width: '90%' }}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" className="flex">
-            <Avatar sx={{ height: 80, width: 80 }}></Avatar>
+            <Avatar sx={{ height: 80, width: 80 }} src=""></Avatar>
             <div className='flex flex-col justify-around p-5'>
               <Typography variant="h6" component="div">
-                  John Doe
+                  {props.username}
               </Typography>
               <Typography variant="body2" component="div">
-                  Short Description
+                  {props.introduction}
               </Typography>
             </div>
             <Button size="small" variant="contained" className='self-end p-5'>
@@ -45,13 +45,13 @@ export default function ProfileCard (): JSX.Element {
                     </Tabs>
                     </Box>
                 <TabPanel value={value} index={0}>
-                    <BasicInfo />
+                    <BasicInfo {...props}/>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <SettingsForm />
                 </TabPanel>
-                <TabPanel value={value} index={2}>
-                           <MyEventList/>
+                        <TabPanel value={value} index={2}>
+                           {/* <MyEventList/> */}
                         </TabPanel>
                     </Box>
         </CardContent>

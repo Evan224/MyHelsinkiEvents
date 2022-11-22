@@ -5,8 +5,14 @@ export default function EventList (props: any): JSX.Element {
   const cssString = props?.cssStyle ?? 'flex  flex-wrap '
   const loadingCss=props?.loadingCss ?? 'h-[60vh]'
 
-  if(!props?.events?.length){
+  if(!props?.events){
     return <LoadingSpinner cssString={loadingCss}/>
+  }
+
+  if(props?.events?.length===0){
+    return (<div className={"flex w-4/5 mx-auto h-[60vh]"}>
+
+    </div>)
   }
 
   return (

@@ -5,22 +5,26 @@ import {joinEvent,likeEvent} from '@/utils/http/eventRequest'
 import ConfirmBox from '@/components/Confirm'
 import {useAuth} from '@/Auth'
 import {useNavigate} from 'react-router-dom'
+import {getStandardDate,getMonthShortName} from '@/utils/index'
 
-interface TitleProps {
-  title: string
-  Date: string
-  Location: string
-}
+// interface TitleProps {
+//   title: string
+//   Date: string
+//   Location: string
+// }
 
 export default function TitleInfo (props:any): JSX.Element {
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  const {location,id} = props;
+
+
+  const {location,id,startTime,endTime} = props;
+  const startDate=getStandardDate(startTime);
+  const endDate=getStandardDate(endTime);
+
   const [ifliked,setIfliked] = useState(props.ifliked);
   const [ifjoined,setIfjoined] = useState(props.ifjoined);
   const navigate = useNavigate();
 
   const state=useAuth();
-  const DateStirng = new Date(props.Date).toLocaleDateString(options)
 
 
   const handleLike = async () => {
@@ -40,18 +44,18 @@ export default function TitleInfo (props:any): JSX.Element {
       navigate('/loginpage');
       return;
     }
-    const res = await joinEvent(id);
-    if(res){
-      setIfjoined(!ifjoined);
-    }
+    // const res = await joinEvent(id);
+    // if(res){
+    //   setIfjoined(!ifjoined);
+    // }
   }
   return (
         <div className="flex flex-col w-4/5 mx-auto min-h-40 justify-center border-b-2 border-blue-200 my-2">
             <Typography variant="h6" className='text-red-500 opacity-70 py-2'>
-                {DateStirng}
+            {getMonthShortName(startDate.month)} {startDate.day} {startDate.hour} - {getMonthShortName(endDate.month)} {endDate.day} {startDate.hour}
             </Typography>
             <Typography variant="h4" className="">
-                {props.title}
+                {props.name}
             </Typography>
             <div  className='py-2 flex w-full justify-between'>
                 {location}
