@@ -11,7 +11,7 @@ export default function TagBar ({callback}:{callback:Function}): JSX.Element {
             id="tags-standard"
             options={tags}
             onChange={(event, value) => callback(value)}
-            getOptionLabel={(option) => option.title}
+            getOptionLabel={(option) => option.name}
             renderInput={(params) => (
             <TextField
                 {...params}
@@ -26,15 +26,15 @@ export default function TagBar ({callback}:{callback:Function}): JSX.Element {
 }
 
 const tags = [
-  { title: 'Music' },
-  { title: 'Art' },
-  { title: 'Sports' },
-  { title: 'Food' },
-  { title: 'Culture' },
-  { title: 'Education' },
-  { title: 'Health' },
-  { title: 'Science' },
-  { title: 'Technology' },
-  { title: 'Business' },
-  { title: 'Politics' }
+  { name: 'Music' },
+  { name: 'Art' },
+  { name: 'Sports' },
+  { name: 'Food' },
+  { name: 'Culture' },
+  { name: 'Education' },
+  { name: 'Health' },
+  { name: 'Science' },
+  { name: 'Technology' },
+  { name: 'Business' },
+  { name: 'Politics' }
 ]

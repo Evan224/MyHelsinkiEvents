@@ -6,9 +6,9 @@ import Typography from '@mui/material/Typography'
 
 export default function FounderCard (props): JSX.Element {
     const {Owner} = props
-    console.log(
-        Owner
-    )
+    // console.log(
+    //     Owner
+    // )
     return (
         <Card >
         <CardContent>

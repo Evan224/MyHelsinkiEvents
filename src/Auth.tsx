@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
     const init=localStorage.getItem("userType")||null;
     const token=localStorage.getItem("token")||null;
     axios.defaults.headers.common['Authorization'] =token;
+    axios.defaults.headers.common["Content-Type"] = "application/json";
     const [userType, setUserType] = useState<null|"admin"|"user">(init as null|"admin"|"user");
 
     const handleLogin=async (username:string,password:string)=>{

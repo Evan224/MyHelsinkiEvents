@@ -5,7 +5,6 @@ import Typography from '@mui/material/Typography'
 import Chip from '@mui/material/Chip'
 
 export default function ParticipantCard (props): JSX.Element {
-    console.log(props)
     const {LikedUsers,Tags,description} = props
     return (
         <Card>

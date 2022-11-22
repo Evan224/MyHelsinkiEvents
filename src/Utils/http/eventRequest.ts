@@ -1,43 +1,79 @@
 import axios from "axios";
 
+axios.defaults.headers.common["Content-Type"] = "application/json";
+
 const getAllEvents = async () => {
-  const result = await axios.post("/event", {
-    payload: {
-      "page": 1,
-      "pageSize": 10,
+  const result = await axios.post(
+    "/event",
+    JSON.stringify({
+      payload: {
+        "page": 1,
+        "pageSize": 10,
+      },
+      action: "get-all-events",
+    }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-    action: "get-all-events",
-  });
+  );
   return result.data;
 };
 
 const getEditorEvents = async () => {
-  const result = await axios.post("/event", {
-    payload: {
-      "page": 1,
-      "pageSize": 10,
+  const result = await axios.post(
+    "/event",
+    JSON.stringify({
+      payload: {
+        "page": 1,
+        "pageSize": 10,
+      },
+      action: "get-all-events",
+    }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-    action: "get-all-events",
-  });
+  );
   return result.data;
 };
-
-const getRecommendedEvents = async () => {
+const getRecommendedEvents = async ({ search }) => {
+  console.log(search);
   const result = await axios.post("/event", {
     action: "get-all-events",
+    payload: {
+      "where": {
+        "name": search,
+      },
+    },
+  }, {
+    headers: {
+      "Content-Type": "application/json",
+    },
   });
   // console.log(result);
+
   return result.data;
 };
 
 const getMylikedEvents = async () => {
-  const result = await axios.post("/me", {
-    action: "get-all-liked-events",
-    payload: {
-      "page": 1,
-      "pageSize": 10,
+  const result = await axios.post(
+    "/me",
+    JSON.stringify({
+      action: "get-all-liked-events",
+      payload: {
+        "page": 1,
+        "pageSize": 10,
+      },
+    }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
     },
-  });
+  );
   return result.data;
 };
 
@@ -48,6 +84,11 @@ const getAlljoinedEvents = async () => {
       action: "get-all-joined-events",
       payload: {},
     }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
   );
   return result.data;
 };
@@ -59,21 +100,50 @@ const getFollowerEvents = async () => {
       "action": "get-all-events-from-users-i-followed",
       "payload": {},
     }),
+    {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
   );
   return result.data;
 };
 
 const getEventDetail = async ({ eventId }) => {
-  const result = await axios.post("/event", {
-    payload: {
-      "expand": "Owner,Tags,LikedUsers",
-      "where": {
-        "id": [eventId],
+  const result = await axios.post(
+    "/event",
+    JSON.stringify({
+      payload: {
+        "expand": "Owner,Tags,LikedUsers",
+        "where": {
+          "id": [eventId],
+        },
+      },
+      action: "get-all-events",
+    }),
+    {
+      headers: {
+        "Content-Type": "application/json",
       },
     },
-    action: "get-all-events",
-  });
+  );
   return result.data;
+};
+
+const likeEvent = async (eventId: string) => {
+  const result = await axios.post("/me", {
+    payload: { eventId },
+    action: "like-an-event",
+  });
+  return result;
+};
+
+const joinEvent = async (eventId: string) => {
+  const result = await axios.post("/me", {
+    payload: { eventId },
+    action: "join-an-event",
+  });
+  return result;
 };
 
 //// deprecated
@@ -84,22 +154,6 @@ const getEvents = async (action: string, payload: any) => {
     action: action,
   });
   return result.data;
-};
-
-const likeEvent = async (eventId: string) => {
-  const result = await getEvents("/event", {
-    payload: { eventId },
-    action: "like-event",
-  });
-  return result;
-};
-
-const joinEvent = async ({ eventId }) => {
-  // const result = await getEvents("/event", {
-  //   payload: { eventId:[eventId] },
-  //   action: "join-event",
-  // });
-  // return result;
 };
 
 export {

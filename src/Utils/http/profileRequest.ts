@@ -27,15 +27,27 @@ const getProfile = async () => {
   return response;
 };
 
-const editProfile = async (profile: Profile) => {
-  const response = await axios.post("/profile", {
-    action: "edit-profile",
-    payload: {
-      profile,
-    },
+const getMyEvents = async () => {
+  const response = await axios.post("/me", {
+    action: "get-all-my-events",
+    payload: {},
   });
 
   return response.data;
 };
 
-export { editProfile, getProfile };
+const editProfile = async (profile: Profile) => {
+  const response = await axios.post(
+    "/profile",
+    JSON.stringify({
+      action: "edit-profile",
+      payload: {
+        profile,
+      },
+    }),
+  );
+
+  return response.data;
+};
+
+export { editProfile, getMyEvents, getProfile };

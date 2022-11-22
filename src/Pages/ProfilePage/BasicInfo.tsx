@@ -4,6 +4,8 @@ import List from '@mui/material/List'
 import ListItemText from '@mui/material/ListItemText'
 import Chip from '@mui/material/Chip'
 import { useState } from 'react'
+import Button from '@mui/material/Button'
+import ImageUploader from '@/components/CreateEventForm/ImageUploader'
 
 interface UserInfoProps {
   name: string
@@ -17,6 +19,15 @@ interface UserInfoProps {
 }
 
 export default function BasicInfo (props): JSX.Element {
+  console.log(props)
+  const [edit, setEdit] = useState(false);
+
+  const handleClick=()=>{
+    if(edit){
+      // send request to update
+    }
+    setEdit(!edit)
+  }
 
   return (
         <Box
@@ -24,7 +35,7 @@ export default function BasicInfo (props): JSX.Element {
         sx={{
           '& > :not(style)': { m: 1 }
         }}
-        className="flex flex-col w-3/5"
+        className="flex flex-col w-4/5"
         noValidate
         autoComplete="off"
       >
@@ -37,26 +48,38 @@ export default function BasicInfo (props): JSX.Element {
         </List>
         <div className='flex w-4/5 justify-between'>
         <TextField id="outlined-read-only-input"
-          label="Name"
+          label="First Name"
           defaultValue={props.firstName}
+          disabled={!edit}
           InputProps={{
             readOnly: true
           }}/>
-        <TextField id="outlined-read-only-input2"
-          label="email"
-          defaultValue={props.email}
+          <TextField id="outlined-read-only-input"
+          label="second Name"
+          defaultValue={props.secondName}
+          disabled={!edit}
           InputProps={{
             readOnly: true
           }}/>
+       
         </div>
+        <div>
+          <TextField id="outlined-read-only-input2"
+            label="email"
+            defaultValue={props.email}
+            InputProps={{
+              readOnly: true
+            }}
+            disabled={!edit} />
+          </div>
         <TextField id="outlined-read-only-input3"
-            label="position"
+            label="shortIntroduction"
             defaultValue={props.shortIntroduction}
             InputProps={{
               readOnly: true
             }}
             className='flex w-4/5 justify-between'
-            />
+            disabled={!edit}/>
         <div className='flex flex-wrap'>
         {/* {props.tags.map((tag) => (
             <Chip label={tag} key={tag} className="p-4 m-4" />
@@ -78,8 +101,9 @@ export default function BasicInfo (props): JSX.Element {
               readOnly: true
             }}
             className="w-4/5"
-            />
-
+            disabled={!edit}/>
+            {edit&&<ImageUploader />}
+            <Button className='self-end' onClick={()=>{handleClick()}}>{edit?"save":"edit"}</Button>
       </Box>
   )
 }

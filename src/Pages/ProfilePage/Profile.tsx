@@ -40,18 +40,18 @@ export default function ProfileCard (props): JSX.Element {
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                     <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label="Information" />
-                    <Tab label="Settings" />
+                    {/* <Tab label="Settings" /> */}
                     <Tab label="Events" />
                     </Tabs>
                     </Box>
                 <TabPanel value={value} index={0}>
                     <BasicInfo {...props}/>
                 </TabPanel>
-                <TabPanel value={value} index={1}>
+                {/* <TabPanel value={value} index={1}>
                     <SettingsForm />
-                </TabPanel>
-                        <TabPanel value={value} index={2}>
-                           {/* <MyEventList/> */}
+                </TabPanel> */}
+                        <TabPanel value={value} index={1}>
+                           <MyEventList />
                         </TabPanel>
                     </Box>
         </CardContent>

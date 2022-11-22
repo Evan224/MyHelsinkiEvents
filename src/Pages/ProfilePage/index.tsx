@@ -11,7 +11,6 @@ export default function Profile (): JSX.Element {
   const location = useLocation();
   const userId=location?.state?.id ?? "";
   const [profile, setProfile] = useFetch(getProfile,{})
-  console.log(profile)
 
   if(!profile) return (
     <LoadingSpinner cssString="h-[80vh]" />

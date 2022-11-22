@@ -44,10 +44,10 @@ export default function TitleInfo (props:any): JSX.Element {
       navigate('/loginpage');
       return;
     }
-    // const res = await joinEvent(id);
-    // if(res){
-    //   setIfjoined(!ifjoined);
-    // }
+    const res = await joinEvent(id);
+    if(res){
+      setIfjoined(!ifjoined);
+    }
   }
   return (
         <div className="flex flex-col w-4/5 mx-auto min-h-40 justify-center border-b-2 border-blue-200 my-2">

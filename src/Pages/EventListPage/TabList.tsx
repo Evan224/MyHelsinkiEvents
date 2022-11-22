@@ -19,13 +19,21 @@ export default function BasicTabs (props): JSX.Element {
   const [joinedEvents, setMyEvents] = useFetch(getAlljoinedEvents,{})
   const [followingEvents, setFollowingEvents] = useFetch(getFollowerEvents,{})
 
-
   const state=useAuth();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
 
+  useEffect(() => {
+    // setEvents(getRecommendedEvents(payload))
+    const fetchEvents = async () => {
+      const events = await getRecommendedEvents(payload)
+      setEvents(events.data)
+    }
+    fetchEvents()
+    console.log('recommendEvents',recommendEvents)
+  }, [payload])
 
   const LoginPanel = (
            <>
