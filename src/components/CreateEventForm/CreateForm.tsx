@@ -28,6 +28,7 @@ export default function CreateForm() {
         const name = data.get('name')?.toString()||""
         const location=data.get('location')?.toString()||""
         const description=data.get('description')?.toString()||""
+        console.log(startValue?.toISOString() )
         //todo finish the request
 
     }

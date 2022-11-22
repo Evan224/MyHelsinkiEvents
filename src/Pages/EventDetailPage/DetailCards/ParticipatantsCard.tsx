@@ -22,6 +22,7 @@ export default function ParticipantCard (props): JSX.Element {
                     <Typography variant="body1" className="py-4">
                     {description}
                     </Typography>
+                    
         </CardContent>
         </Card>
     )

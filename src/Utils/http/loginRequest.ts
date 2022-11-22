@@ -5,6 +5,12 @@ interface LoginPayload {
   username: string;
 }
 
+interface SignupPayload {
+  email: string;
+  password: string;
+  username: string;
+}
+
 const userLogin = async (payload: LoginPayload) => {
   const params = {
     action: "login",
@@ -17,12 +23,6 @@ const userLogin = async (payload: LoginPayload) => {
     throw new Error("Login failed");
   }
 };
-
-interface SignupPayload {
-  email: string;
-  password: string;
-  username: string;
-}
 
 const userSignup = async (payload: SignupPayload) => {
   const response = await axios.post("/auth", {

@@ -31,9 +31,9 @@ export default function ConfirmBox (props:ConfirmProps): JSX.Element {
                 </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={()=>handleClose(false)}>Disagree</Button>
+                    <Button onClick={()=>handleClose(false)}>cancle</Button>
                     <Button onClick={()=>handleClose(true)} autoFocus>
-                        Agree
+                        confirm
                     </Button>
                 </DialogActions>
              </Dialog>
