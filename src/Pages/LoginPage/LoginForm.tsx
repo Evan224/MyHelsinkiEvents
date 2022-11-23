@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { useState,useContext} from 'react'
 import { useLocation,useNavigate} from 'react-router-dom'
 import { useAuth } from '@/Auth'
+import messageService from '@/components/Message'
+import SimpleBackdrop from '@/components/SimpleBackdrop'
 
 
 const theme = createTheme()
@@ -22,6 +24,7 @@ const theme = createTheme()
 export default function SignInSide (): JSX.Element {
   // react Router params
   const location = useLocation()
+  const [loading, setLoading] = useState(false)
   const [formState, setFormState] = useState(location.state?.formState||'login' )
   const state=useAuth();
   const navigate=useNavigate();
@@ -37,22 +40,45 @@ export default function SignInSide (): JSX.Element {
       return;
     }
     if(formState==='login'){
+      setLoading(true)
       const status=await state.handleLogin(username,password)
       if(status){
+        messageService.success({
+          content:"Login successfully",
+          duration:2000
+        })
         navigate('/')
+      }else{
+        messageService.error({
+          content:"Login failed",
+          duration:2000
+        })
       }
+      setLoading(false)
     }else if(formState==='sign'){
       if(password===confirm){
+        setLoading(true)
         const status=await state.handleSignUp(email,username,password)
         if(status){
+          messageService.success({
+            content:"Sign up successfully",
+            duration:2000
+          })
           setFormState('login')
+        }else{
+          messageService.error({
+            content:"Sign up failed!",
+            duration:2000
+          })
         }
       }
+      setLoading(false)
     }
   }
 
   return (
     <ThemeProvider theme={theme}>
+      <SimpleBackdrop open={loading}/>
       <Grid container component="main" sx={{
         height: '90vh',
         dipslay: 'flex'

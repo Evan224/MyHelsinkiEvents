@@ -5,7 +5,9 @@ import Typography from '@mui/material/Typography'
 
 
 export default function GeneralCard (props:any): JSX.Element {
-    const {LikedUsers,Owner,location,endTime} = props
+    const {LikedUsers,Owner,location,endTime,startTime} = props
+    const t1=new Date(startTime)
+    const t2=new Date(endTime)
     return (
         <Card >
             <CardContent>
@@ -22,13 +24,12 @@ export default function GeneralCard (props:any): JSX.Element {
                             Location: {location}
                         </Typography>
                         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                            End Time : {endTime}
+                            The event will begin at {t1.toLocaleDateString()} {t1.toLocaleTimeString()}
                         </Typography>
-                        {/* <Typography variant="body1">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Odio unde repellat aliquid blanditiis recusandae et possimus quasi ducimus dolores totam! Repudiandae facere expedita deserunt perspiciatis optio, reiciendis dolor unde?
-                        <br />
-                        {'"a benevolent smile"'}
-                        </Typography> */}
+                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                            end at : {t2.toLocaleDateString()} {t2.toLocaleTimeString()}
+                        </Typography>
+                        
             </CardContent>
         </Card>
     )

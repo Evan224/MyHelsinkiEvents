@@ -2,6 +2,7 @@ import Drawer from '@mui/material/Drawer';
 import { useState } from 'react';
 import MoreInfoDrawer from './MoreInfoDrawer';
 import Button from '@mui/material/Button';
+import CreateForm from '@/components/CreateEventForm/CreateForm';
 
 interface MoreInfoDrawerProps {
     title: string
@@ -33,7 +34,7 @@ export default function MoreInfoCard(props: MoreInfoDrawerProps) {
                 width: '50%',
             }}
         >
-            <MoreInfoDrawer {...props}/>
+            <CreateForm />
         </Drawer>
         </>
         )

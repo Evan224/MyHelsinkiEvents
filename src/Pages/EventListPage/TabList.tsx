@@ -30,7 +30,7 @@ export default function BasicTabs (props): JSX.Element {
             <SubTabPanel value={value} index={1} requestFunction={getMylikedEvents} payload={payload}/>
             <SubTabPanel value={value} index={2} requestFunction={getAlljoinedEvents} payload={payload}/>
             <SubTabPanel value={value} index={3} requestFunction={getFollowerEvents} payload={payload}/>
-               </>)
+              </>)
 
 
   return (

@@ -133,6 +133,22 @@ const joinEvent = async (eventId: string) => {
   return result;
 };
 
+const unlikeEvent = async (eventId: string) => {
+  const result = await axios.post("/me", {
+    payload: { eventId },
+    action: "dislike-an-event",
+  });
+  return result;
+};
+
+const unjoinEvent = async (eventId: string) => {
+  const result = await axios.post("/me", {
+    payload: { eventId },
+    action: "leave-an-event",
+  });
+  return result;
+};
+
 const createEvent = async (payload) => {
   const result = await axios.post("/me", {
     payload,
@@ -152,4 +168,6 @@ export {
   getRecommendedEvents,
   joinEvent,
   likeEvent,
+  unjoinEvent,
+  unlikeEvent,
 };

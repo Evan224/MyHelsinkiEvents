@@ -11,12 +11,16 @@ import ImageUploader from './ImageUploader';
 import TagBar from '../TagBar';
 import Button from '@mui/material/Button';
 import { createEvent } from '@/utils/http/eventRequest';
+import SimpleBackdrop from '../SimpleBackdrop';
+import messageService from '../Message';
 
 // Date, duration, location, picture, description, title, tags, FounderName, FounderDescription
-export default function CreateForm() {
+export default function CreateForm(props) {
+    const {handleCallback} = props;
     const [startValue, setValue] = useState<Dayjs | null>(null)
     const [endValue, setEndValue] = useState<Dayjs | null>(null)
     const [tags, setTags] = useState([]);
+    const [loading, setLoading] = useState(false)
 
     const getTagFeedback=(tags: string[])=>{
         setTags(tags)
@@ -36,9 +40,26 @@ export default function CreateForm() {
             location,
             description,
         }
-
-        const response = await createEvent(payload)
-        
+        setLoading(true)
+        try{
+            const response = await createEvent(payload)
+            if(response.status===200){
+                messageService.success({
+                    content:"Create event successfully",
+                    duration:2000
+            })}else{
+                messageService.error({
+                    content:"Create event failed!",
+                    duration:2000
+            })}
+        }catch(e){
+            messageService.error({
+                content:"Create event failed!",
+                duration:2000
+            })
+        }
+        setLoading(false)
+        handleCallback()
     }
     return(
         <Box className='fle flex-col' onSubmit={handleSubmit} component="form" noValidate>
@@ -55,23 +76,7 @@ export default function CreateForm() {
                 name="location"
                 required
                 />
-            </div>
-             {/* <div className='flex p-4 justify-between'>
-                <TextField
-                    id="outlined-name"
-                    label="Duration"
-                    InputProps={{
-                        endAdornment:<InputAdornment position="end">h</InputAdornment>
-                    }}
-                    sx={{width: '50%'}}
-                />
-                <TextField
-                    id="outlined-name"
-                    label="Founder"
-                />
-            </div> */}
-
-            
+            </div>    
            
             <div className='flex flex-col p-4'>
             <LocalizationProvider dateAdapter={AdapterDayjs} className="my-2">

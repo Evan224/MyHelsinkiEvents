@@ -6,27 +6,48 @@ import Chip from '@mui/material/Chip'
 import { useState } from 'react'
 import Button from '@mui/material/Button'
 import ImageUploader from '@/components/CreateEventForm/ImageUploader'
+import SimpleBackdrop from '@/components/SimpleBackdrop'
+import messageService from '@/components/Message'
+import { editProfile } from '@/utils/http/meRequest'
 
-interface UserInfoProps {
-  name: string
-  email: string
-  position: string
-  tags: string[]
-  description: string
-  followers: number
-  following: number
-  likedEvents: number
-}
 
 export default function BasicInfo (props): JSX.Element {
+  console.log(props, 'props')
   const [edit, setEdit] = useState(false);
+  const [loading, setLoading] = useState(false)
+  const [firstName, setFirstName] = useState(props.firstName)
+  const [lastName, setLastName] = useState(props.lastName)
+  const [introduction, setIntroduction] = useState(props.introduction)
+  const [email, setEmail] = useState(props.email)
+  // const [phone, setPhone] = useState(props.phone)
+  const [description, setDescription] = useState(props.description)
 
-  const handleClick=()=>{
+  const handleSubmit=async (event)=>{
+    event.preventDefault()
     if(edit){
-      // send request to update
-    }
-    setEdit(!edit)
+      const profile={
+        firstName,
+        lastName,
+        introduction,
+        email
+      }
+      setLoading(true)
+      const response = await editProfile(profile)
+      if(response){
+        messageService.success({
+          content:"Edit profile successfully",
+          duration:2000
+        })
+      }else{
+        messageService.error({
+          content:"Edit profile failed!",
+          duration:2000
+        })
+      }
+      setLoading(false)
   }
+  setEdit(!edit)
+}
 
   return (
         <Box
@@ -37,6 +58,7 @@ export default function BasicInfo (props): JSX.Element {
         className="flex flex-col w-4/5"
         noValidate
         autoComplete="off"
+        onSubmit={handleSubmit}
       >
         <List sx={{}} className="flex flex-row w-3/5">
             <ListItemText primary="following" secondary={props.totalFollowingUsers} />
@@ -48,35 +70,32 @@ export default function BasicInfo (props): JSX.Element {
         <div className='flex w-4/5 justify-between'>
         <TextField id="outlined-read-only-input"
           label="First Name"
-          defaultValue={props.firstName}
+          name="firstname"
+          value={firstName}
+          onChange={(e)=>setFirstName(e.target.value)}
           disabled={!edit}
-          InputProps={{
-            readOnly: true
-          }}/>
+         />
           <TextField id="outlined-read-only-input"
           label="second Name"
-          defaultValue={props.secondName}
+          name="lastname"
+          value={lastName}
+          onChange={(e)=>setLastName(e.target.value)}
           disabled={!edit}
-          InputProps={{
-            readOnly: true
-          }}/>
+          />
        
         </div>
         <div>
           <TextField id="outlined-read-only-input2"
             label="email"
-            defaultValue={props.email}
-            InputProps={{
-              readOnly: true
-            }}
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
             disabled={!edit} />
           </div>
         <TextField id="outlined-read-only-input3"
             label="shortIntroduction"
-            defaultValue={props.shortIntroduction}
-            InputProps={{
-              readOnly: true
-            }}
+            name="introduction"
+            value={introduction}
+            onChange={(e)=>setIntroduction(e.target.value)}
             className='flex w-4/5 justify-between'
             disabled={!edit}/>
         <div className='flex flex-wrap'>
@@ -95,6 +114,7 @@ export default function BasicInfo (props): JSX.Element {
                       multiline
                       rows={4}
             label="description"
+            name="description"
             defaultValue={props.introduction}
             InputProps={{
               readOnly: true
@@ -102,7 +122,8 @@ export default function BasicInfo (props): JSX.Element {
             className="w-4/5"
             disabled={!edit}/>
             {edit&&<ImageUploader />}
-            <Button className='self-end' onClick={()=>{handleClick()}}>{edit?"save":"edit"}</Button>
+            <Button variant="contained" color="primary" 
+            className='self-end' type="submit">{edit?"save":"edit"}</Button>
       </Box>
   )
 }

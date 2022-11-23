@@ -1,7 +1,7 @@
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import {useState} from 'react'
-import {joinEvent,likeEvent} from '@/utils/http/eventRequest'
+import {joinEvent,likeEvent,unjoinEvent,unlikeEvent} from '@/utils/http/eventRequest'
 import ConfirmBox from '@/components/Confirm'
 import {useAuth} from '@/Auth'
 import {useNavigate} from 'react-router-dom'
@@ -39,13 +39,27 @@ export default function TitleInfo (props:any): JSX.Element {
       return;
     }
     setLoading(true)
-    try{
-    const res = await likeEvent(id);
-    if(res){
-      setIfliked(!ifliked);
-      messageService.success({content:'Like this event successfully!',duration:1500});
-    }}catch(e){
-      messageService.error({content:'Like this event failed!',duration:1500});
+    const content = ifliked?'You have unliked this event':'You have liked this event';
+    if(!ifliked){
+
+        try{
+        const res = await likeEvent(id);
+        if(res){
+          setIfliked(!ifliked);
+          messageService.success({content,duration:1500});
+        }}catch(e){
+          messageService.error({content:'failed!',duration:1500});
+        }
+       
+    }else{
+      try{
+        const res = await unlikeEvent(id);
+        if(res){
+          setIfliked(!ifliked);
+          messageService.success({content,duration:1500});
+        }}catch(e){
+          messageService.error({content:'failed!',duration:1500});
+        }
     }
     setLoading(false)
   }
@@ -56,13 +70,27 @@ export default function TitleInfo (props:any): JSX.Element {
       return;
     }
     setLoading(true)
-    try{
-      const res = await joinEvent(id);
-      if(res){
-        setIfjoined(!ifjoined);
-      }
-    }catch(e){
-      messageService.error({content:'Join this event failed!',duration:1500});
+    const content = ifjoined?'You have unjoined this event':'You have joined this event';
+    if(!ifjoined){
+
+        try{
+        const res = await joinEvent(id);
+        if(res){
+          setIfjoined(!ifjoined);
+          messageService.success({content,duration:1500});
+        }}catch(e){
+          messageService.error({content:'failed!',duration:1500});
+        }
+       
+    }else{
+      try{
+        const res = await unjoinEvent(id);
+        if(res){
+          setIfjoined(!ifjoined);
+          messageService.success({content,duration:1500});
+        }}catch(e){
+          messageService.error({content:'failed!',duration:1500});
+        }
     }
     setLoading(false)
   }
@@ -71,7 +99,8 @@ export default function TitleInfo (props:any): JSX.Element {
             <SimpleBackdrop open={loading} />
             {/* <Alert content={content} open={false} severity={severity} /> */}
             <Typography variant="h6" className='text-red-500 opacity-70 py-2'>
-            {getMonthShortName(startDate.month)} {startDate.day} {startDate.hour} - {getMonthShortName(endDate.month)} {endDate.day} {startDate.hour}
+            From &nbsp;&nbsp;&nbsp; {getMonthShortName(startDate.month)} {startDate.day}  {startDate.hour} &nbsp;&nbsp;&nbsp;
+            To &nbsp;&nbsp;&nbsp; {getMonthShortName(endDate.month)} {endDate.day} {endDate.hour}
             </Typography>
             <Typography variant="h4" className="">
                 {props.name}

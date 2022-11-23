@@ -27,10 +27,12 @@ interface AccordionItemProps {
 }
 
 
-export default function AccordionItem(props: AccordionItemProps) {
-    const {title, founder, Date:date, description, picture, tags, expanded, handleChange} = props
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const DateStirng = new Date(date).toLocaleDateString(options)
+export default function AccordionItem(props) {
+    if(!props?.event) return null;
+    const {event, expanded, handleChange} = props;
+    const {id,startTime,endTime,description,name,thumbnailUrl,Tags} = event;
+    console.log(props)
+
     return (
         <Accordion expanded={expanded} onChange={()=>{
             handleChange()
@@ -42,10 +44,10 @@ export default function AccordionItem(props: AccordionItemProps) {
           className='flex justify-around'
         >
           <Typography sx={{ width: '33%', flexShrink: 0 }}>
-            {title}
+            {name}
           </Typography>
-          <Typography sx={{ color: 'text.secondary',width:"20%" }}>{founder || "None"}</Typography>
-          <Typography sx={{ color: 'text.secondary',width:"40%" }}>{DateStirng}</Typography>
+          {/* <Typography sx={{ color: 'text.secondary',width:"20%" }}>{founder || "None"}</Typography>
+          <Typography sx={{ color: 'text.secondary',width:"40%" }}>{DateStirng}</Typography> */}
         </AccordionSummary>
         <AccordionDetails className='flex items-between justify-between'>
                 <CardMedia
@@ -54,14 +56,14 @@ export default function AccordionItem(props: AccordionItemProps) {
                     width: '30%',
                     padding: '1rem',
                 }}
-                image={picture}
+                image={thumbnailUrl}
                 alt="Not Found"
                  />
                  <div className="flex flex-col justify-between">
                  <Typography sx={{ color: 'text.secondary',padding:"1rem"}}>{description}</Typography>
                  <div>
-                   {tags.map((tag) => {
-                          return <Chip label={tag.Name} key={tag.Name} className="p-4 m-4" />
+                   {Tags.map((tag) => {
+                          return <Chip label={tag.name} key={tag.name} className="p-4 m-4" />
                    })}
                  </div>
                   
@@ -69,5 +71,5 @@ export default function AccordionItem(props: AccordionItemProps) {
                 <MoreInfoCard {...props}/>
         </AccordionDetails>
       </Accordion>
-    )
+    );
 }

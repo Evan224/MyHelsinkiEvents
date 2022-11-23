@@ -12,6 +12,7 @@ import SettingsForm from './SettingsPage'
 import MyEventList from './MyEventList'
 import EventList from '@/components/EventList'
 
+
 export default function ProfileCard (props): JSX.Element {
   const [value, setValue] = React.useState(0)
 
@@ -31,9 +32,9 @@ export default function ProfileCard (props): JSX.Element {
                   {props.introduction}
               </Typography>
             </div>
-            <Button size="small" variant="contained" className='self-end p-5'>
+            {/* <Button size="small" variant="contained" className='self-end p-5'>
               Follow
-            </Button>
+            </Button> */}
 
           </Typography>
           <Box sx={{ width: '100%', minHeight: '60vh' }}>
@@ -47,9 +48,6 @@ export default function ProfileCard (props): JSX.Element {
                 <TabPanel value={value} index={0}>
                     <BasicInfo {...props}/>
                 </TabPanel>
-                {/* <TabPanel value={value} index={1}>
-                    <SettingsForm />
-                </TabPanel> */}
                         <TabPanel value={value} index={1}>
                            <MyEventList />
                         </TabPanel>

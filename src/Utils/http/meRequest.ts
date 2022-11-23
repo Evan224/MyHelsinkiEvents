@@ -22,4 +22,15 @@ const unFollowUser = async (userId: string) => {
   return response;
 };
 
-export { followUser, unFollowUser };
+const editProfile = async (profile) => {
+  const response = await axios.post("/me", {
+    action: "edit-my-profile",
+    payload: {
+      data: profile,
+    },
+  });
+
+  return response.data;
+};
+
+export { editProfile, followUser, unFollowUser };

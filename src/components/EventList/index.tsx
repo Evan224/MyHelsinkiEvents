@@ -5,6 +5,8 @@ export default function EventList (props: any): JSX.Element {
   const cssString = props?.cssStyle ?? 'flex  flex-wrap '
   const loadingCss=props?.loadingCss ?? 'h-[60vh]'
 
+  console.log(props, 'props')
+
   if(!props?.events){
     return <LoadingSpinner cssString={loadingCss}/>
   }

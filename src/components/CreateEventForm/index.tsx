@@ -5,6 +5,9 @@ import Button from '@mui/material/Button';
 
 export default function CreateEventForm() {
     const [state, setState] = useState(false);
+    const handleCallback = () => {
+        setState(false);
+    };
 
     return (
         <>
@@ -20,7 +23,7 @@ export default function CreateEventForm() {
                 width: '50%',
             }}
         >
-              <CreateForm />
+              <CreateForm handleCallback={handleCallback} />
         </Drawer>
         </>
         )

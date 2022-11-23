@@ -13,9 +13,9 @@ export default function ParticipantCard (props): JSX.Element {
                     {LikedUsers?.length||0} people have liked this event
                     </Typography>
                     {/* <Typography sx={{ mb: 1.5 }} color="text.secondary"> */}
-                    <div className='w-1/2'>
+                    <div className=''>
                         {Tags.map((tag) => {
-                           return <Chip label={tag.name} key={tag.id}/>
+                           return <Chip label={tag.name} key={tag.id} className="mx-2"/>
                         })}
                     </div>
                     {/* </Typography> */}

@@ -3,6 +3,7 @@ import TabPanel  from "./TabPanel";
 import useFetch from "@/utils/hooks/useFetch";
 import {useState,useEffect} from "react";
 import SimpleBackdrop from "@/components/SimpleBackdrop";
+import EmptyEventList from "@/components/EmptyEvent";
 
 export default function SubTabPanel(props){
     const [loading, setLoading] = useState(false)
@@ -23,12 +24,14 @@ export default function SubTabPanel(props){
             setLoading(false)
             }
         fetchEvents()
-  }, [payload])
+     }, [payload])
+
+     const ifEvents=events?.length>0||false;
 
     return (
         <TabPanel value={value} index={index} >
             <SimpleBackdrop open={loading}/>
-        <EventList events={events}/>
+                {ifEvents?<EventList events={events} cssStyle="flex flex-wrap justify-center"/>:<EmptyEventList/>}
       </TabPanel>
     )
 }

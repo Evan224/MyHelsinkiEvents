@@ -27,7 +27,7 @@ const Tabmenu = (): JSX.Element => {
   const state=useAuth()
   const newMenu = useMemo(() => {
     if(state?.userType==="user"){
-      return menu.slice(0,4)
+      return menu.slice(0,5)
     }else if(state?.userType==="admin"){
       return menu
     }else{
