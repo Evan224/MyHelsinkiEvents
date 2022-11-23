@@ -12,7 +12,6 @@ import { editProfile } from '@/utils/http/meRequest'
 
 
 export default function BasicInfo (props): JSX.Element {
-  console.log(props, 'props')
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(false)
   const [firstName, setFirstName] = useState(props.firstName)

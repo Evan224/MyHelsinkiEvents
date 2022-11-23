@@ -100,7 +100,6 @@ const getFollowerEvents = async ({ search, tags, date }) => {
 };
 
 const getEventDetail = async ({ eventId }) => {
-  console.log(eventId, "eventId");
   const result = await axios.post(
     "/event",
     JSON.stringify({
@@ -113,7 +112,6 @@ const getEventDetail = async ({ eventId }) => {
       action: "get-event-details",
     }),
   );
-  console.log(result, "result");
   return result;
 };
 
@@ -157,8 +155,17 @@ const createEvent = async (payload) => {
   return result;
 };
 
+const editEvent = async (payload) => {
+  const result = await axios.post("/me", {
+    payload,
+    action: "edit-an-event",
+  });
+  return result;
+};
+
 export {
   createEvent,
+  editEvent,
   getAllEvents,
   getAlljoinedEvents,
   getEditorEvents,

@@ -14,7 +14,6 @@ export default function EventDetail (): JSX.Element {
   const [state, setState] = useFetch(getEventDetail,{
     eventId:location.state
   },location.state)
-  console.log(state)
 
   if(!state?.name) return (
        <LoadingSpinner cssString="h-[100vh]" />

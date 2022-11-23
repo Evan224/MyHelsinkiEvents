@@ -31,7 +31,7 @@ export default function AccordionItem(props) {
     if(!props?.event) return null;
     const {event, expanded, handleChange} = props;
     const {id,startTime,endTime,description,name,thumbnailUrl,Tags} = event;
-    console.log(props)
+    // console.log(props)
 
     return (
         <Accordion expanded={expanded} onChange={()=>{
