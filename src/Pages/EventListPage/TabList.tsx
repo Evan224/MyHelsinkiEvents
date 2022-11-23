@@ -10,14 +10,14 @@ import {formatEvent} from '@/utils/index'
 import { useEffect,useState,useMemo} from 'react'
 import { useAuth } from '@/Auth'
 import { getAlljoinedEvents,getMylikedEvents,getRecommendedEvents,getFollowerEvents } from '@/utils/http/eventRequest'
+import SimpleBackdrop from '@/components/SimpleBackdrop'
+import SubTabPanel from './SubTabPanel'
 
 export default function BasicTabs (props): JSX.Element {
   const {payload} = props;
   const [value, setValue] = useState(0)
-  const [recommendEvents, setEvents] = useFetch(getRecommendedEvents,{})
-  const [likesEvents, setLikesEvents] = useFetch(getMylikedEvents,{})
-  const [joinedEvents, setMyEvents] = useFetch(getAlljoinedEvents,{})
-  const [followingEvents, setFollowingEvents] = useFetch(getFollowerEvents,{})
+
+  const [loading, setLoading] = useState(false)
 
   const state=useAuth();
 
@@ -25,39 +25,17 @@ export default function BasicTabs (props): JSX.Element {
     setValue(newValue)
   }
 
-  useEffect(() => {
-    // setEvents(getRecommendedEvents(payload))
-    const fetchEvents = async () => {
-      const events = await getRecommendedEvents(payload)
-      const likedEvents= await getMylikedEvents(payload)
-      const joinedEvents= await getAlljoinedEvents(payload)
-      const followerEvents= await getFollowerEvents(payload)
-      console.log(likedEvents,joinedEvents,followerEvents)
-      setEvents(events.data)
-      setLikesEvents(likedEvents.data)
-      setMyEvents(joinedEvents.data)
-      setFollowingEvents(followerEvents.data)
-    }
-    fetchEvents()
-    // console.log('recommendEvents',recommendEvents)
-  }, [payload])
-
   const LoginPanel = (
            <>
-                <TabPanel value={value} index={1}>
-                        <EventList events={likesEvents}/>
-                        </TabPanel>
-                        <TabPanel value={value} index={2}>
-                          <EventList events={joinedEvents}/>
-                        </TabPanel>
-                        <TabPanel value={value} index={3}>
-                          <EventList events={followingEvents}/>
-                        </TabPanel>
+            <SubTabPanel value={value} index={1} requestFunction={getMylikedEvents} payload={payload}/>
+            <SubTabPanel value={value} index={2} requestFunction={getAlljoinedEvents} payload={payload}/>
+            <SubTabPanel value={value} index={3} requestFunction={getFollowerEvents} payload={payload}/>
                </>)
 
 
   return (
     <div className='w-full'>
+      <SimpleBackdrop open={loading}/>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', width: '80%' }} className="mx-auto">
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Recommend" sx={{display:"block"}}/>
@@ -72,9 +50,7 @@ export default function BasicTabs (props): JSX.Element {
           }}/>
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0} >
-        <EventList events={recommendEvents}/>
-      </TabPanel>
+      <SubTabPanel value={value} index={0} requestFunction={getRecommendedEvents} payload={payload}/>
       {state?.userType?LoginPanel:null}
     </div>
   )

@@ -12,11 +12,6 @@ const getAllEvents = async () => {
       },
       action: "get-all-events",
     }),
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
   );
   return result.data;
 };
@@ -31,11 +26,6 @@ const getEditorEvents = async () => {
       },
       action: "get-all-events",
     }),
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
   );
   return result.data;
 };
@@ -50,12 +40,7 @@ const getRecommendedEvents = async ({ search, tags, date }) => {
         },
       },
     },
-  }, {
-    headers: {
-      "Content-Type": "application/json",
-    },
   });
-  // console.log(result);
 
   return result.data;
 };
@@ -74,11 +59,6 @@ const getMylikedEvents = async ({ search, tags, date }) => {
         },
       },
     }),
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
   );
   return result.data;
 };
@@ -97,11 +77,6 @@ const getAlljoinedEvents = async ({ search, tags, date }) => {
         },
       },
     }),
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
   );
   return result.data;
 };
@@ -120,11 +95,6 @@ const getFollowerEvents = async ({ search, tags, date }) => {
         },
       },
     }),
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
   );
   return result.data;
 };
@@ -142,11 +112,6 @@ const getEventDetail = async ({ eventId }) => {
       },
       action: "get-event-details",
     }),
-    {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    },
   );
   console.log(result, "result");
   return result;

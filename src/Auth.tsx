@@ -1,6 +1,7 @@
 import { createContext,useState,useContext } from "react";
 import { userSignup,userLogin } from "./utils/http/loginRequest";
 import axios from "axios";
+import messageService from "@/components/Message";
 
 interface IAuthContext {
     userType: null|"admin"|"user";
@@ -17,6 +18,24 @@ const AuthProvider = ({ children }) => {
     axios.defaults.headers.common['Authorization'] =token||"-";
     axios.defaults.headers.common["Content-Type"] = "application/json";
     const [userType, setUserType] = useState<null|"admin"|"user">(init as null|"admin"|"user");
+
+    // check if token is valid
+    axios.interceptors.response.use(
+        (response) => {
+            return response;
+        },
+        (error: any) => {
+          console.log("interceptor error inside", error);
+          if(error.response.status===401){
+            refreshLoginState();
+            setUserType(null);
+            messageService.error({content:"The token is expired! Please log in again",duration:3000});
+            // location.reload();
+          }
+          return error;
+        },
+      );
+      
 
     const handleLogin=async (username:string,password:string)=>{
         const body=await userLogin({username,password})
@@ -61,6 +80,8 @@ const AuthProvider = ({ children }) => {
         handleSignUp
     }
 
+    //the token is expired
+
     return(
         <AuthContext.Provider value={value}>
             {children}
@@ -74,6 +95,12 @@ const useAuth = () => {
         throw new Error('useAuth must be used within a AuthProvider')
     }
     return context
+}
+
+const refreshLoginState=async ()=>{
+    localStorage.removeItem("id");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userType");
 }
 
 

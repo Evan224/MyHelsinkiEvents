@@ -13,31 +13,6 @@ import LinkTab from '@mui/material/Tab'
 import { useAuth } from '@/Auth'
 import ConfirmBox from '../Confirm'
 
-const title= 'Are you sure you want to logout?'
-const content="You can not get your personal recommendations if you logout."
-
-const menu= [
-  {
-    name: 'Home',
-    path: '/homepage'
-  },
-  {
-    name: 'Event',
-    path: '/eventlist'
-  },
-  {
-    name: 'Info',
-    path: '/informationpage'
-  },
-  {
-    name: 'Profile',
-    path: '/ProfilePage'
-  },
-  {
-    name: 'Manage',
-    path: '/managepage'
-  }
-]
 
 const getValueIndex= (path: string|boolean) => {
   const index = menu.findIndex((item) => item.path === path)
@@ -139,3 +114,29 @@ export default function Header (): JSX.Element {
     </Box>
   )
 }
+
+const title= 'Are you sure you want to logout?'
+const content="You can not get your personal recommendations if you logout."
+
+const menu= [
+  {
+    name: 'Home',
+    path: '/homepage'
+  },
+  {
+    name: 'Event',
+    path: '/eventlist'
+  },
+  {
+    name: 'Info',
+    path: '/informationpage'
+  },
+  {
+    name: 'Profile',
+    path: '/ProfilePage'
+  },
+  {
+    name: 'Manage',
+    path: '/managepage'
+  }
+]

@@ -46,7 +46,8 @@ export default function EventListPage (): JSX.Element {
   // tags, date, search
   const [state, dispatch] = useReducer(reducer, initialState)
   const [payload, setPayload] = useState({})
-  const callBackSearch = (value:string) => {
+  const callBackSearch = (value) => {
+    // e.preventDefault()
     setPayload(state)
   }
   // useEffect(() => {

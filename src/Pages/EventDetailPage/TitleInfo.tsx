@@ -6,6 +6,10 @@ import ConfirmBox from '@/components/Confirm'
 import {useAuth} from '@/Auth'
 import {useNavigate} from 'react-router-dom'
 import {getStandardDate,getMonthShortName} from '@/utils/index'
+import SimpleBackdrop from '@/components/SimpleBackdrop'
+import Message from '@/components/Message'
+import messageService from '@/components/Message'
+// import Alert from '@/components/AlertExample'
 
 // interface TitleProps {
 //   title: string
@@ -14,8 +18,7 @@ import {getStandardDate,getMonthShortName} from '@/utils/index'
 // }
 
 export default function TitleInfo (props:any): JSX.Element {
-
-
+  const [loading, setLoading] = useState(false)
   const {location,id,startTime,endTime} = props;
   const startDate=getStandardDate(startTime);
   const endDate=getStandardDate(endTime);
@@ -23,6 +26,9 @@ export default function TitleInfo (props:any): JSX.Element {
   const [ifliked,setIfliked] = useState(props._isLiked);
   const [ifjoined,setIfjoined] = useState(props._isJoined);
   const navigate = useNavigate();
+
+  const [content,setContent] = useState('');
+  const [severity,setSeverity] = useState('success');
 
   const state=useAuth();
 
@@ -32,11 +38,16 @@ export default function TitleInfo (props:any): JSX.Element {
       navigate('/loginpage');
       return;
     }
-
+    setLoading(true)
+    try{
     const res = await likeEvent(id);
     if(res){
       setIfliked(!ifliked);
+      messageService.success({content:'Like this event successfully!',duration:1500});
+    }}catch(e){
+      messageService.error({content:'Like this event failed!',duration:1500});
     }
+    setLoading(false)
   }
 
   const handleJoin = async () => {
@@ -44,13 +55,21 @@ export default function TitleInfo (props:any): JSX.Element {
       navigate('/loginpage');
       return;
     }
-    const res = await joinEvent(id);
-    if(res){
-      setIfjoined(!ifjoined);
+    setLoading(true)
+    try{
+      const res = await joinEvent(id);
+      if(res){
+        setIfjoined(!ifjoined);
+      }
+    }catch(e){
+      messageService.error({content:'Join this event failed!',duration:1500});
     }
+    setLoading(false)
   }
   return (
         <div className="flex flex-col w-4/5 mx-auto min-h-40 justify-center border-b-2 border-blue-200 my-2">
+            <SimpleBackdrop open={loading} />
+            {/* <Alert content={content} open={false} severity={severity} /> */}
             <Typography variant="h6" className='text-red-500 opacity-70 py-2'>
             {getMonthShortName(startDate.month)} {startDate.day} {startDate.hour} - {getMonthShortName(endDate.month)} {endDate.day} {startDate.hour}
             </Typography>

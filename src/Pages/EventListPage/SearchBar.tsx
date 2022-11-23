@@ -19,7 +19,11 @@ export default function SearchBar ({dispatch,callBackSearch}:DispatchProps): JSX
              dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Events" value={value} onChange={(event)=>{
               setValue(event.target.value)
              }}/>
-            <button onClick={()=>{callBackSearch!()}}
+            <button onClick={(e)=>{
+              e.preventDefault()
+              callBackSearch!()
+              setValue('')
+            }}
             type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
          </div>
         </div>
