@@ -14,18 +14,20 @@ export default function EventDetail (): JSX.Element {
   const [state, setState] = useFetch(getEventDetail,{
     eventId:location.state
   },location.state)
+  console.log(state)
 
-  if(!state[0]) return (
+  if(!state?.name) return (
        <LoadingSpinner cssString="h-[100vh]" />
   )
+
 
   return (
         <div className="flex justify-center w-[100vw]">
             <div className="background">
-                <img src={state[0].thumbnailUrl} className="object-cover h-[30vh] w-[100vw]">
+                <img src={state.thumbnailUrl} className="object-cover h-[30vh] w-[100vw]">
                 </img>
-                <TitleInfo {...state[0]} />
-                <DetailCards {...state[0]}  />
+                <TitleInfo {...state} />
+                <DetailCards {...state}  />
             </div>
         </div>
   )

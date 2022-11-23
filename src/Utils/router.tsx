@@ -9,7 +9,7 @@ import ProfilePage from '../pages/ProfilePage'
 import ManagePage from '@/pages/ManagePage'
 import { redirect } from "react-router-dom";
 import {
-  createBrowserRouter
+  createBrowserRouter,ScrollRestoration
 } from 'react-router-dom'
 import Layout from '@/components/Layout'
 

@@ -29,7 +29,6 @@ const userSignup = async (payload: SignupPayload) => {
     action: "sign-up",
     payload,
   });
-  console.log(response, "response");
   if (response.status === 200) {
     return response.data;
   } else {

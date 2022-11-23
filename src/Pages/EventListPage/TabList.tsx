@@ -29,10 +29,17 @@ export default function BasicTabs (props): JSX.Element {
     // setEvents(getRecommendedEvents(payload))
     const fetchEvents = async () => {
       const events = await getRecommendedEvents(payload)
+      const likedEvents= await getMylikedEvents(payload)
+      const joinedEvents= await getAlljoinedEvents(payload)
+      const followerEvents= await getFollowerEvents(payload)
+      console.log(likedEvents,joinedEvents,followerEvents)
       setEvents(events.data)
+      setLikesEvents(likedEvents.data)
+      setMyEvents(joinedEvents.data)
+      setFollowingEvents(followerEvents.data)
     }
     fetchEvents()
-    console.log('recommendEvents',recommendEvents)
+    // console.log('recommendEvents',recommendEvents)
   }, [payload])
 
   const LoginPanel = (

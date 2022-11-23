@@ -20,8 +20,8 @@ export default function TitleInfo (props:any): JSX.Element {
   const startDate=getStandardDate(startTime);
   const endDate=getStandardDate(endTime);
 
-  const [ifliked,setIfliked] = useState(props.ifliked);
-  const [ifjoined,setIfjoined] = useState(props.ifjoined);
+  const [ifliked,setIfliked] = useState(props._isLiked);
+  const [ifjoined,setIfjoined] = useState(props._isJoined);
   const navigate = useNavigate();
 
   const state=useAuth();
@@ -63,10 +63,10 @@ export default function TitleInfo (props:any): JSX.Element {
                 <p></p>
                 <Button variant={ifliked?"contained":"outlined"} color="primary"
                  className="w-1/6 self-end" onClick={()=>{handleLike()}}>
-                        {ifliked?"liked!":"like"}</Button>
+                        {ifliked?"liked":"like"}</Button>
                 <Button variant={ifjoined?"contained":"outlined"} color="primary" 
                 className="w-1/6 self-end" onClick={()=>{handleJoin()}}>
-                        {ifjoined?"joined!":"join"}</Button>
+                        {ifjoined?"joined":"join"}</Button>
             </div>
         </div>
   )

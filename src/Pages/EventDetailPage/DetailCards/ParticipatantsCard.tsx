@@ -10,7 +10,7 @@ export default function ParticipantCard (props): JSX.Element {
         <Card>
         <CardContent>
                     <Typography variant='h5' gutterBottom>
-                    {LikedUsers.length} people have liked this event
+                    {LikedUsers?.length||0} people have liked this event
                     </Typography>
                     {/* <Typography sx={{ mb: 1.5 }} color="text.secondary"> */}
                     <div className='w-1/2'>

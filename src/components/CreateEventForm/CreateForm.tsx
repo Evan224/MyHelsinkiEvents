@@ -10,6 +10,7 @@ import { useState } from 'react';
 import ImageUploader from './ImageUploader';
 import TagBar from '../TagBar';
 import Button from '@mui/material/Button';
+import { createEvent } from '@/utils/http/eventRequest';
 
 // Date, duration, location, picture, description, title, tags, FounderName, FounderDescription
 export default function CreateForm() {
@@ -21,7 +22,7 @@ export default function CreateForm() {
         setTags(tags)
     }
 
-    const handleSubmit=(event)=>{
+    const handleSubmit=async (event)=>{
         event.preventDefault()
         const data = new FormData(event.currentTarget)
         // console.log(firstnam)
@@ -30,7 +31,14 @@ export default function CreateForm() {
         const description=data.get('description')?.toString()||""
         console.log(startValue?.toISOString() )
         //todo finish the request
+        const payload={
+            name,
+            location,
+            description,
+        }
 
+        const response = await createEvent(payload)
+        
     }
     return(
         <Box className='fle flex-col' onSubmit={handleSubmit} component="form" noValidate>
@@ -48,7 +56,7 @@ export default function CreateForm() {
                 required
                 />
             </div>
-             <div className='flex p-4 justify-between'>
+             {/* <div className='flex p-4 justify-between'>
                 <TextField
                     id="outlined-name"
                     label="Duration"
@@ -61,7 +69,7 @@ export default function CreateForm() {
                     id="outlined-name"
                     label="Founder"
                 />
-            </div>
+            </div> */}
 
             
            

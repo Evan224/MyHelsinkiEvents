@@ -13,6 +13,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <AuthProvider >
         <RouterProvider router={router} />
+        {/* <ScrollRestoration /> */}
     </AuthProvider>
   </React.StrictMode>
 )

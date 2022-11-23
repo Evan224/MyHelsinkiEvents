@@ -39,13 +39,15 @@ const getEditorEvents = async () => {
   );
   return result.data;
 };
-const getRecommendedEvents = async ({ search }) => {
-  console.log(search);
+const getRecommendedEvents = async ({ search, tags, date }) => {
   const result = await axios.post("/event", {
     action: "get-all-events",
     payload: {
       "where": {
         "name": search,
+        "Tags": {
+          "name": tags,
+        },
       },
     },
   }, {
@@ -58,14 +60,18 @@ const getRecommendedEvents = async ({ search }) => {
   return result.data;
 };
 
-const getMylikedEvents = async () => {
+const getMylikedEvents = async ({ search, tags, date }) => {
   const result = await axios.post(
     "/me",
     JSON.stringify({
       action: "get-all-liked-events",
       payload: {
-        "page": 1,
-        "pageSize": 10,
+        "where": {
+          "name": search,
+          "Tags": {
+            "name": tags,
+          },
+        },
       },
     }),
     {
@@ -77,12 +83,19 @@ const getMylikedEvents = async () => {
   return result.data;
 };
 
-const getAlljoinedEvents = async () => {
+const getAlljoinedEvents = async ({ search, tags, date }) => {
   const result = await axios.post(
     "/me",
     JSON.stringify({
       action: "get-all-joined-events",
-      payload: {},
+      payload: {
+        "where": {
+          "name": search,
+          "Tags": {
+            "name": tags,
+          },
+        },
+      },
     }),
     {
       headers: {
@@ -93,12 +106,19 @@ const getAlljoinedEvents = async () => {
   return result.data;
 };
 
-const getFollowerEvents = async () => {
+const getFollowerEvents = async ({ search, tags, date }) => {
   const result = await axios.post(
     "/me",
     JSON.stringify({
       "action": "get-all-events-from-users-i-followed",
-      "payload": {},
+      "payload": {
+        "where": {
+          "name": search,
+          "Tags": {
+            "name": tags,
+          },
+        },
+      },
     }),
     {
       headers: {
@@ -110,16 +130,17 @@ const getFollowerEvents = async () => {
 };
 
 const getEventDetail = async ({ eventId }) => {
+  console.log(eventId, "eventId");
   const result = await axios.post(
     "/event",
     JSON.stringify({
       payload: {
         "expand": "Owner,Tags,LikedUsers",
         "where": {
-          "id": [eventId],
+          "id": eventId,
         },
       },
-      action: "get-all-events",
+      action: "get-event-details",
     }),
     {
       headers: {
@@ -127,7 +148,8 @@ const getEventDetail = async ({ eventId }) => {
       },
     },
   );
-  return result.data;
+  console.log(result, "result");
+  return result;
 };
 
 const likeEvent = async (eventId: string) => {
@@ -146,22 +168,20 @@ const joinEvent = async (eventId: string) => {
   return result;
 };
 
-//// deprecated
-
-const getEvents = async (action: string, payload: any) => {
-  const result = await axios.post("/event", {
-    payload: payload || {},
-    action: action,
+const createEvent = async (payload) => {
+  const result = await axios.post("/me", {
+    payload,
+    action: "create-an-event",
   });
-  return result.data;
+  return result;
 };
 
 export {
+  createEvent,
   getAllEvents,
   getAlljoinedEvents,
   getEditorEvents,
   getEventDetail,
-  getEvents,
   getFollowerEvents,
   getMylikedEvents,
   getRecommendedEvents,

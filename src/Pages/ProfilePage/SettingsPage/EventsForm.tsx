@@ -9,7 +9,6 @@ import EventList from '@/components/EventList'
 
 export default function EventsForm () {
   const callback=(tag:string)=>{
-    // console.log(tag)
   }
   return (
     <React.Fragment>

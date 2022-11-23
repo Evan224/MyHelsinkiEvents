@@ -13,7 +13,6 @@ export default function myEventList (props): JSX.Element {
   const cssString = props?.cssStyle ?? 'flex  flex-wrap '
   // const events= props?.events ?? tests
   const [events]=useFetch(getMyEvents, {});
-  console.log(events)
   return (
     <div className='flex flex-col'>
           <CreateEventForm/>

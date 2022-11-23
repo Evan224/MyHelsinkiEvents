@@ -19,7 +19,6 @@ interface UserInfoProps {
 }
 
 export default function BasicInfo (props): JSX.Element {
-  console.log(props)
   const [edit, setEdit] = useState(false);
 
   const handleClick=()=>{

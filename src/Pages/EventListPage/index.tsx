@@ -49,6 +49,9 @@ export default function EventListPage (): JSX.Element {
   const callBackSearch = (value:string) => {
     setPayload(state)
   }
+  // useEffect(() => {
+  //   console.log(payload)
+  // }, [payload])
 
   return (
     <div className='mx-auto'>
@@ -60,12 +63,11 @@ export default function EventListPage (): JSX.Element {
             <DatePicker dispatch={dispatch}/>
           </div>
           <TagBar callback={(value)=>{
-            dispatch({type: 'TAGS', payload: value.map((item)=>item.title)})
+            dispatch({type: 'TAGS', payload: value.map((item)=>item.name)})
           }}/>
         </div>
       </div>
         <TabList payload={payload}/>
-        {/* <EventList events={tests}/> */}
     </div>
   )
 }

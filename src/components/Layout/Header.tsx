@@ -98,6 +98,7 @@ export default function Header (): JSX.Element {
   const LogoutCallback = (ifLogout) => {
     if(ifLogout){
       state?.handleLogout();
+      navigate('/loginpage')
     }
     setOpen(false);
   }

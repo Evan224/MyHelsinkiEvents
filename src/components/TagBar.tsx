@@ -1,8 +1,22 @@
 import Autocomplete from '@mui/material/Autocomplete'
 import TextField from '@mui/material/TextField'
+import { useState } from 'react'
+import useFetch from '@/utils/hooks/useFetch'
+import {getAllTags} from '@/utils/http/otherRequest'
+
+
+interface Itag{
+  name?: string,
+  id?: number,
+}
 
 export default function TagBar ({callback}:{callback:Function}): JSX.Element {
+  // const [tags, setTags] = useState<Itag[]>([{}])
+  const [tags]=useFetch(getAllTags,{},'')
 
+  if(!tags){
+    return <div></div>
+  }
 
   return (
         <div className="w-3/5 p-5">
@@ -11,7 +25,7 @@ export default function TagBar ({callback}:{callback:Function}): JSX.Element {
             id="tags-standard"
             options={tags}
             onChange={(event, value) => callback(value)}
-            getOptionLabel={(option) => option.name}
+            getOptionLabel={(option) => option.name||""}
             renderInput={(params) => (
             <TextField
                 {...params}
@@ -24,17 +38,3 @@ export default function TagBar ({callback}:{callback:Function}): JSX.Element {
         </div>
   )
 }
-
-const tags = [
-  { name: 'Music' },
-  { name: 'Art' },
-  { name: 'Sports' },
-  { name: 'Food' },
-  { name: 'Culture' },
-  { name: 'Education' },
-  { name: 'Health' },
-  { name: 'Science' },
-  { name: 'Technology' },
-  { name: 'Business' },
-  { name: 'Politics' }
-]
