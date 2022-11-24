@@ -15,13 +15,6 @@ import SimpleBackdrop from '@/components/SimpleBackdrop'
 
 export default function ProfileCard (props): JSX.Element {
   const [value, setValue] = React.useState(0)
-  // const loading= React.useMemo(()=>{
-  //   if(props.id){
-  //     return false
-  //   }else{
-  //     return true
-  //   }
-  // },[props.id])
   
 
   const handleChange = (event: React.SyntheticEvent, newValue: any) => {

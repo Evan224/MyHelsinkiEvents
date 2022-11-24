@@ -20,17 +20,20 @@ const getEditorEvents = async () => {
   const result = await axios.post(
     "/event",
     JSON.stringify({
+      action: "get-all-events",
       payload: {
         "page": 1,
-        "pageSize": 10,
+        "pageSize": 3,
+        "where": {
+          "_isPinned": 1,
+        },
       },
-      action: "get-all-events",
     }),
   );
   return result.data;
 };
 const getRecommendedEvents = async ({ search, tags, date, page }) => {
-  console.log("getRecommendedEvents", search, tags, date);
+  const ifTags = tags ? { "Tags": { "name": tags } } : {};
   const result = await axios.post("/event", {
     action: "get-all-events",
     payload: {
@@ -38,9 +41,7 @@ const getRecommendedEvents = async ({ search, tags, date, page }) => {
       "pageSize": 6,
       "where": {
         "name": search,
-        "Tags": {
-          "name": tags,
-        },
+        ...ifTags,
       },
     },
   });
@@ -49,6 +50,7 @@ const getRecommendedEvents = async ({ search, tags, date, page }) => {
 };
 
 const getMylikedEvents = async ({ search, tags, date, page }) => {
+  const ifTags = tags ? { "Tags": { "name": tags } } : {};
   const result = await axios.post(
     "/me",
     JSON.stringify({
@@ -58,9 +60,7 @@ const getMylikedEvents = async ({ search, tags, date, page }) => {
         "pageSize": 6,
         "where": {
           "name": search,
-          "Tags": {
-            "name": tags,
-          },
+          ...ifTags,
         },
       },
     }),
@@ -88,6 +88,7 @@ const getAlljoinedEvents = async ({ search, tags, date, page }) => {
 };
 
 const getFollowerEvents = async ({ search, tags, date, page }) => {
+  const ifTags = tags ? { "Tags": { "name": tags } } : {};
   const result = await axios.post(
     "/me",
     JSON.stringify({
@@ -97,9 +98,7 @@ const getFollowerEvents = async ({ search, tags, date, page }) => {
         "pageSize": 6,
         "where": {
           "name": search,
-          "Tags": {
-            "name": tags,
-          },
+          ...ifTags,
         },
       },
     }),

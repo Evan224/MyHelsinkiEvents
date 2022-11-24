@@ -24,7 +24,7 @@ function getStandardDate(date: string) {
   };
 }
 
-function formatEvent(data) {
+function formatEvent(data: any) {
   return data.map((event: any) => {
     const DateCur = new Date(event.Date);
     return {

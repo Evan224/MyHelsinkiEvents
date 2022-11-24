@@ -14,7 +14,7 @@ export default function TagBar ({callback}:{callback:Function}): JSX.Element {
   // const [tags, setTags] = useState<Itag[]>([{}])
   const [tags]=useFetch(getAllTags,{},'')
 
-  if(!tags){
+  if(!tags?.data){
     return <div></div>
   }
 
@@ -23,7 +23,7 @@ export default function TagBar ({callback}:{callback:Function}): JSX.Element {
         <Autocomplete
             multiple
             id="tags-standard"
-            options={tags}
+            options={tags.data}
             onChange={(event, value) => callback(value)}
             getOptionLabel={(option:Itag) => option?.name||""}
             renderInput={(params) => (

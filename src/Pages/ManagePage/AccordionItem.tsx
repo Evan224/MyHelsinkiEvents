@@ -31,7 +31,6 @@ export default function AccordionItem(props) {
     if(!props?.event) return null;
     const {event, expanded, handleChange} = props;
     const {id,startTime,endTime,description,name,thumbnailUrl,Tags} = event;
-    // console.log(props)
 
     return (
         <Accordion expanded={expanded} onChange={()=>{
@@ -62,7 +61,7 @@ export default function AccordionItem(props) {
                  <div className="flex flex-col justify-between">
                  <Typography sx={{ color: 'text.secondary',padding:"1rem"}}>{description}</Typography>
                  <div>
-                   {Tags.map((tag) => {
+                   {Tags.map((tag:any) => {
                           return <Chip label={tag.name} key={tag.name} className="p-4 m-4" />
                    })}
                  </div>

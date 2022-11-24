@@ -12,14 +12,14 @@ export default function Profile (): JSX.Element {
   const userId=location?.state?.id ?? "";
   const [profile, setProfile] = useFetch(getProfile,{})
 
-  if(!profile) return (
+  if(!profile?.data) return (
     <LoadingSpinner cssString="h-[80vh]" />
   )
 
   return (
         <div className="flex justify-center w-[100vw] flex-col items-center">
           <PicCard />
-          <ProfileCard {...profile}/>
+          <ProfileCard {...profile.data}/>
         </div>
   )
 }

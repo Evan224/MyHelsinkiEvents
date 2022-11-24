@@ -5,7 +5,7 @@ export default function useFetch (requestFunction:Function,params:Object,depende
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       const result = await requestFunction({...params})
-      setData(result.data)
+      setData(result)
     }
     fetchData()
   }, [dependency])

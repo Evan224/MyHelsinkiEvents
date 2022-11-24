@@ -29,17 +29,14 @@ export default function CreateForm(props:any) {
     const [formData, setFormData] = useState("");
 
     const getTagFeedback=(tags:any)=>{
-        console.log(tags,"tags")
         setTags(tags)
     }
 
     const handleSubmit=async (event:any)=>{
         event.preventDefault()
-        console.log("submit",name,description,location,startValue,endValue,tags,formData)
         setLoading(true)
         const responseUrl=await imageUpload(formData);
         
-        console.log(startValue?.toISOString() )
         const payload={
             name,
             location,
