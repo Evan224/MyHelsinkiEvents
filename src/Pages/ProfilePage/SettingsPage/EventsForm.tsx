@@ -21,7 +21,7 @@ export default function EventsForm () {
           <Typography variant="h6" gutterBottom className="flex p-4">
         There are some events that you might be interested in!
       </Typography>
-          <EventList events={tests} cssStyle="flex"/>
+          {/* <EventList events={tests} cssStyle="flex"/> */}
         </Grid>
         <Grid item xs={12}>
           <FormControlLabel

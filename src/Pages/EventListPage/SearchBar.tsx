@@ -1,5 +1,5 @@
 // Search the events by name, date, and location
-import { DispatchProps } from '.'
+import { DispatchProps } from './TabHeader'
 import { useEffect,useState } from 'react'
 
 export default function SearchBar ({dispatch,callBackSearch}:DispatchProps): JSX.Element {

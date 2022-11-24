@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 interface ConfirmProps {
     title: string;
     content: string;
-    handleClose: (any) => void;
+    handleClose: (value:any) => void;
     open: boolean;
 }
 

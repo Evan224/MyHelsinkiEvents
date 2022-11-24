@@ -12,7 +12,7 @@ interface IAuthContext {
 
 const AuthContext = createContext<IAuthContext|null>(null);
 
-const AuthProvider = ({ children }) => {
+const AuthProvider = ({ children }:{children:any}) => {
     const init=localStorage.getItem("userType")||null;
     const token=localStorage.getItem("token")||null;
     axios.defaults.headers.common['Authorization'] =token||"-";

@@ -4,10 +4,10 @@ import TextField from '@mui/material/TextField'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { DatePicker } from '@mui/x-date-pickers/DatePicker'
-import { DispatchProps } from '.'
+// import { DispatchProps } from './index'
 import { useEffect } from 'react'
 
-export default function BasicDatePicker ({dispatch}:DispatchProps): JSX.Element {
+export default function BasicDatePicker ({dispatch}:any): JSX.Element {
   const [value, setValue] = React.useState<Dayjs | null>(null)
   useEffect(() => {
     // dispatch({type: 'DATE', payload: value})

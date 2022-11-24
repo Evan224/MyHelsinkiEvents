@@ -16,7 +16,7 @@ import messageService from '../Message';
 import { imageUpload } from '@/utils/http/meRequest'
 
 // Date, duration, location, picture, description, title, tags, FounderName, FounderDescription
-export default function CreateForm(props) {
+export default function CreateForm(props:any) {
     const {handleCallback,ifCreate=true} = props;
     const [startValue, setValue] = useState<Dayjs | null>(null)
     const [endValue, setEndValue] = useState<Dayjs | null>(null)
@@ -28,12 +28,12 @@ export default function CreateForm(props) {
     const [location, setLocation] = useState(props.location||"");
     const [formData, setFormData] = useState("");
 
-    const getTagFeedback=(tags)=>{
+    const getTagFeedback=(tags:any)=>{
         console.log(tags,"tags")
         setTags(tags)
     }
 
-    const handleSubmit=async (event)=>{
+    const handleSubmit=async (event:any)=>{
         event.preventDefault()
         console.log("submit",name,description,location,startValue,endValue,tags,formData)
         setLoading(true)
@@ -86,7 +86,7 @@ export default function CreateForm(props) {
         handleCallback()
     }
 
-    const handleDelete=async (event)=>{
+    const handleDelete=async (event:any)=>{
         event.preventDefault()
         // delete event
     }
@@ -145,7 +145,7 @@ export default function CreateForm(props) {
             </div>
              <TagBar callback={getTagFeedback} />
              <div className="w-1/2 p-4">
-               <ImageUploader callback={(formData)=>{
+               <ImageUploader callback={(formData:any)=>{
                 setFormData(formData)
                }}/>
              </div>

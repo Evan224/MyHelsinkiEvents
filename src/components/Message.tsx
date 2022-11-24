@@ -1,9 +1,10 @@
+
 import { useState } from 'react';
 // material-ui
 import { Snackbar, Alert } from '@mui/material';
 
 function Message(props) {
-    const { content, duration, type } = {...props};
+    const { content, duration, type } = props;
     const [open, setOpen] = useState(true);
     const handleClose = (event, reason) => {
         setOpen(false);
@@ -20,7 +21,7 @@ function Message(props) {
 import { createRoot } from 'react-dom/client';
 
 const messageService = {
-    dom: null,
+    dom: null||document.getElementById('message'),
     success({ content, duration = 1500 }) {
         // 创建一个dom
         this.dom = document.createElement('div');

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Alert from '@mui/material/Alert';
 
 
-export default function ActionAlerts(props) {
+export default function ActionAlerts(props:any) {
     const {content } = props;
     const severity = props.severity || 'success';
     const callback = props.callback;

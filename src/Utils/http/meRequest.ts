@@ -41,13 +41,14 @@ const imageUpload = async (formData) => {
 
   const { uploadUrl, imageUrl } = response.data;
 
-  var instance = axios.create();
-  delete instance.defaults.headers.common["Authorization"];
-  instance.defaults.headers.common["Content-Type"] = "image/png";
+  // var instance = axios.create();
+  // delete instance.defaults.headers.common["Authorization"];
+  // instance.defaults.headers.common["Content-Type"] = "image/png";
 
-  const uploadResponse = await instance.put(uploadUrl, formData, {
+  const uploadResponse = await axios.put(uploadUrl, formData, {
     headers: {
       "Content-Type": "image/png",
+      "Authorization": undefined,
     },
   });
   if (uploadResponse.status === 200) {

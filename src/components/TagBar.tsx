@@ -25,7 +25,7 @@ export default function TagBar ({callback}:{callback:Function}): JSX.Element {
             id="tags-standard"
             options={tags}
             onChange={(event, value) => callback(value)}
-            getOptionLabel={(option) => option.name||""}
+            getOptionLabel={(option:Itag) => option?.name||""}
             renderInput={(params) => (
             <TextField
                 {...params}

@@ -69,21 +69,20 @@ const getMylikedEvents = async ({ search, tags, date, page }) => {
 };
 
 const getAlljoinedEvents = async ({ search, tags, date, page }) => {
+  const ifTags = tags ? { "Tags": { "name": tags } } : {};
   const result = await axios.post(
     "/me",
-    JSON.stringify({
+    {
       action: "get-all-joined-events",
       payload: {
         "page": page || 1,
         "pageSize": 6,
         "where": {
           "name": search,
-          "Tags": {
-            "name": tags,
-          },
+          ...ifTags,
         },
       },
-    }),
+    },
   );
   return result.data;
 };

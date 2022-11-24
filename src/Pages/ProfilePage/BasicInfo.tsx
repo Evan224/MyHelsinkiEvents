@@ -55,7 +55,7 @@ export default function BasicInfo (props): JSX.Element {
         })
       }
       setLoading(false)
-      window.location.reload()
+      // window.location.reload()
     }
     setEdit(!edit)
   }

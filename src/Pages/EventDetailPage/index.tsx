@@ -15,15 +15,15 @@ export default function EventDetail (): JSX.Element {
     eventId:location.state
   },location.state)
 
-  if(!state?.name) return (
-       <LoadingSpinner cssString="h-[100vh]" />
-  )
+  // if(!state?.name) return (
+  //      <LoadingSpinner cssString="h-[100vh]" />
+  // )
 
 
   return (
         <div className="flex justify-center w-[100vw]">
             <div className="background">
-                <img src={state.thumbnailUrl} className="object-cover h-[30vh] w-[100vw]">
+                <img src={state?.thumbnailUrl} className="object-cover h-[30vh] w-[100vw]">
                 </img>
                 <TitleInfo {...state} />
                 <DetailCards {...state}  />

@@ -24,7 +24,7 @@ export default function ProfileCard (props): JSX.Element {
   // },[props.id])
   
 
-  const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+  const handleChange = (event: React.SyntheticEvent, newValue: any) => {
     setValue(newValue)
   }
   return (
