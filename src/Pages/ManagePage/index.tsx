@@ -9,6 +9,8 @@ import useFetch from '@/utils/hooks/useFetch'
 import {formatEvent} from '@/utils/index'
 import AccordionItem from './AccordionItem'
 import { getMyEvents } from '@/utils/http/profileRequest';
+import TabHeader from '../EventListPage/TabHeader';
+
 
 export default function ManagePage() {
   const [expanded, setExpanded] = useState(-1);
@@ -25,6 +27,7 @@ export default function ManagePage() {
 
   return (
     <div className='p-4 min-h-[100vh]'>
+      <TabHeader />
       {
         events.map((event, index) => {
           if(!event) return null;

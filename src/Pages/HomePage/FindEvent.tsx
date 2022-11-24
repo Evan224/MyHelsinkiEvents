@@ -5,7 +5,7 @@ export default function FindEvent ({show}): JSX.Element {
   const navigate = useNavigate()
   return (
         <div className='flex flex-col mx-auto items-center text-cyan-800 justify-center
-        bg-gradient-to-r from-cyan-100 to-blue-500 h-min-[20vh] w-full p-4'>
+        bg-gradient-to-r from-cyan-100 to-blue-500 h-min-[30vh] w-full p-4'>
             <div>
                 <h1 className='text-4xl font-bold text-center'>Find Events Near You</h1>
                 <p> Are you interested in the upcoming vacation?</p>

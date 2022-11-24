@@ -30,7 +30,7 @@ export default function CreateForm(props) {
 
     const getTagFeedback=(tags)=>{
         console.log(tags,"tags")
-        setTags(tags.map(tag=>tag.name))
+        setTags(tags)
     }
 
     const handleSubmit=async (event)=>{
@@ -46,7 +46,7 @@ export default function CreateForm(props) {
             description,
             startTime:startValue?.toISOString(),
             endTime:endValue?.toISOString(),
-            tags,
+            Tags:tags,
             thumbnailUrl:responseUrl,
         }
 
@@ -84,6 +84,11 @@ export default function CreateForm(props) {
         }
         setLoading(false)
         handleCallback()
+    }
+
+    const handleDelete=async (event)=>{
+        event.preventDefault()
+        // delete event
     }
 
     return(
@@ -144,9 +149,11 @@ export default function CreateForm(props) {
                 setFormData(formData)
                }}/>
              </div>
-             <div className="p-4 flex flex-row-reverse">
-                <Button variant="contained" color="primary" className="w-1/2 p-4" type="submit">
+             <div className="p-4 flex flex-row-reverse justify-between">
+                <Button variant="contained" color="primary" className="w-1/3 p-4" type="submit">
                    {ifCreate?"Create":"Save"}</Button>
+                   {!ifCreate&&<Button variant="contained" color="primary" className="w-1/3 p-4" onClick={handleDelete} >
+                   Delete</Button>}
              </div>
         </Box>
     )

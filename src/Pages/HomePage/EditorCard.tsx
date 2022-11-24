@@ -49,17 +49,17 @@ const EditorCardList = (): JSX.Element => {
   const [events, setEvents] = useState<Event.IEvent[]>([])
   useEffect(() => {
     const fetchEvents = async () => {
-      const { data } = await getEditorEvents()
-      setEvents(data)
+      const response = await getEditorEvents()
+      setEvents(response?.data||[])
     }
     fetchEvents()
   }, [])
 
   return (
-        <div className='flex w-4/5 mx-auto'>
-        {events.slice(0, 3).map((event, index) => (
-            <EventCard key={index} {...event} />
-        ))}
+        <div className='flex w-4/5 mx-auto p-4'>
+          {events.slice(0, 3).map((event, index) => (
+              <EventCard key={index} {...event} />
+          ))}
         </div>
   )
 }

@@ -15,7 +15,7 @@ export default function Footer (): JSX.Element {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }} className="flex justify-center">
             Powered by Helsinki Events
           </Typography>
-        </Toolbar>w
+        </Toolbar>
       </AppBar>
     </Box>
   )

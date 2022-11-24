@@ -4,6 +4,7 @@ import useFetch from '@/utils/hooks/useFetch'
 import { getMyEvents } from '@/utils/http/profileRequest'
 import { getAllEvents } from '@/utils/http/eventRequest'
 // import { }
+import ManagePage from '@/pages/ManagePage'
 
 // export default function MyEventList (): JSX.Element {
 //   return <EventList events={tests}/>
@@ -16,13 +17,14 @@ export default function myEventList (props): JSX.Element {
   return (
     <div className='flex flex-col'>
           <CreateEventForm/>
-          <div className={cssString+"flex mx-auto"}>
+          <ManagePage />
+          {/* <div className={cssString+"flex mx-auto"}>
             {events.map((item, index) => {
               return (
                 <EventCard key={index} {...item} />
               )
             })}
-          </div>
+          </div> */}
           </div>
   )
 }

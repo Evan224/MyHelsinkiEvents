@@ -8,7 +8,7 @@ const getAllEvents = async () => {
     JSON.stringify({
       payload: {
         "page": 1,
-        "pageSize": 10,
+        "pageSize": 6,
       },
       action: "get-all-events",
     }),
@@ -29,10 +29,13 @@ const getEditorEvents = async () => {
   );
   return result.data;
 };
-const getRecommendedEvents = async ({ search, tags, date }) => {
+const getRecommendedEvents = async ({ search, tags, date, page }) => {
+  console.log("getRecommendedEvents", search, tags, date);
   const result = await axios.post("/event", {
     action: "get-all-events",
     payload: {
+      "page": page || 1,
+      "pageSize": 6,
       "where": {
         "name": search,
         "Tags": {
@@ -45,12 +48,14 @@ const getRecommendedEvents = async ({ search, tags, date }) => {
   return result.data;
 };
 
-const getMylikedEvents = async ({ search, tags, date }) => {
+const getMylikedEvents = async ({ search, tags, date, page }) => {
   const result = await axios.post(
     "/me",
     JSON.stringify({
       action: "get-all-liked-events",
       payload: {
+        "page": page || 1,
+        "pageSize": 6,
         "where": {
           "name": search,
           "Tags": {
@@ -63,12 +68,14 @@ const getMylikedEvents = async ({ search, tags, date }) => {
   return result.data;
 };
 
-const getAlljoinedEvents = async ({ search, tags, date }) => {
+const getAlljoinedEvents = async ({ search, tags, date, page }) => {
   const result = await axios.post(
     "/me",
     JSON.stringify({
       action: "get-all-joined-events",
       payload: {
+        "page": page || 1,
+        "pageSize": 6,
         "where": {
           "name": search,
           "Tags": {
@@ -81,12 +88,14 @@ const getAlljoinedEvents = async ({ search, tags, date }) => {
   return result.data;
 };
 
-const getFollowerEvents = async ({ search, tags, date }) => {
+const getFollowerEvents = async ({ search, tags, date, page }) => {
   const result = await axios.post(
     "/me",
     JSON.stringify({
       "action": "get-all-events-from-users-i-followed",
       "payload": {
+        "page": page || 1,
+        "pageSize": 6,
         "where": {
           "name": search,
           "Tags": {
