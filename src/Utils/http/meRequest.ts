@@ -33,4 +33,26 @@ const editProfile = async (profile) => {
   return response.data;
 };
 
-export { editProfile, followUser, unFollowUser };
+const imageUpload = async (formData) => {
+  const response = await axios.post("/me", {
+    action: "get-image-upload-url",
+    payload: {},
+  });
+
+  const { uploadUrl, imageUrl } = response.data;
+
+  var instance = axios.create();
+  delete instance.defaults.headers.common["Authorization"];
+  instance.defaults.headers.common["Content-Type"] = "image/png";
+
+  const uploadResponse = await instance.put(uploadUrl, formData, {
+    headers: {
+      "Content-Type": "image/png",
+    },
+  });
+  if (uploadResponse.status === 200) {
+    return imageUrl;
+  }
+};
+
+export { editProfile, followUser, imageUpload, unFollowUser };

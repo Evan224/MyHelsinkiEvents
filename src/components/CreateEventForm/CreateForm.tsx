@@ -13,33 +13,43 @@ import Button from '@mui/material/Button';
 import { createEvent,editEvent} from '@/utils/http/eventRequest';
 import SimpleBackdrop from '../SimpleBackdrop';
 import messageService from '../Message';
+import { imageUpload } from '@/utils/http/meRequest'
 
 // Date, duration, location, picture, description, title, tags, FounderName, FounderDescription
 export default function CreateForm(props) {
-    console.log(props,"props")
     const {handleCallback,ifCreate=true} = props;
     const [startValue, setValue] = useState<Dayjs | null>(null)
     const [endValue, setEndValue] = useState<Dayjs | null>(null)
     const [tags, setTags] = useState([]);
     const [loading, setLoading] = useState(false)
 
-    const [name, setName] = useState(props.name);
-    const [description, setDescription] = useState(props.description);
-    const [location, setLocation] = useState(props.location);
+    const [name, setName] = useState(props.name||"");
+    const [description, setDescription] = useState(props.description||"");
+    const [location, setLocation] = useState(props.location||"");
+    const [formData, setFormData] = useState("");
 
-    const getTagFeedback=(tags: string[])=>{
-        // setTags(tags)
+    const getTagFeedback=(tags)=>{
+        console.log(tags,"tags")
+        setTags(tags.map(tag=>tag.name))
     }
 
     const handleSubmit=async (event)=>{
         event.preventDefault()
+        console.log("submit",name,description,location,startValue,endValue,tags,formData)
+        setLoading(true)
+        const responseUrl=await imageUpload(formData);
+        
         console.log(startValue?.toISOString() )
         const payload={
             name,
             location,
             description,
+            startTime:startValue?.toISOString(),
+            endTime:endValue?.toISOString(),
+            tags,
+            thumbnailUrl:responseUrl,
         }
-        setLoading(true)
+
         if(ifCreate){
             try{
                 const response = await createEvent(payload)
@@ -130,7 +140,9 @@ export default function CreateForm(props) {
             </div>
              <TagBar callback={getTagFeedback} />
              <div className="w-1/2 p-4">
-               <ImageUploader/>
+               <ImageUploader callback={(formData)=>{
+                setFormData(formData)
+               }}/>
              </div>
              <div className="p-4 flex flex-row-reverse">
                 <Button variant="contained" color="primary" className="w-1/2 p-4" type="submit">

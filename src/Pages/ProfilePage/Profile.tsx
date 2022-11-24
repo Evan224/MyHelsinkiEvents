@@ -11,25 +11,34 @@ import BasicInfo from './BasicInfo'
 import SettingsForm from './SettingsPage'
 import MyEventList from './MyEventList'
 import EventList from '@/components/EventList'
-
+import SimpleBackdrop from '@/components/SimpleBackdrop'
 
 export default function ProfileCard (props): JSX.Element {
   const [value, setValue] = React.useState(0)
+  // const loading= React.useMemo(()=>{
+  //   if(props.id){
+  //     return false
+  //   }else{
+  //     return true
+  //   }
+  // },[props.id])
+  
 
   const handleChange = (event: React.SyntheticEvent, newValue: string) => {
     setValue(newValue)
   }
   return (
     <Card sx={{ width: '90%' }}>
+        {/* <SimpleBackdrop open={loading}/> */}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" className="flex">
-            <Avatar sx={{ height: 80, width: 80 }} src=""></Avatar>
+            <Avatar sx={{ height: 80, width: 80 }} src={props.avatarUrl}></Avatar>
             <div className='flex flex-col justify-around p-5'>
               <Typography variant="h6" component="div">
                   {props.username}
               </Typography>
               <Typography variant="body2" component="div">
-                  {props.introduction}
+                  {props.shortIntroduction||"The user has not set a introduction yet."}
               </Typography>
             </div>
             {/* <Button size="small" variant="contained" className='self-end p-5'>

@@ -3,34 +3,45 @@ import TextField from '@mui/material/TextField'
 import List from '@mui/material/List'
 import ListItemText from '@mui/material/ListItemText'
 import Chip from '@mui/material/Chip'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '@mui/material/Button'
 import ImageUploader from '@/components/CreateEventForm/ImageUploader'
-import SimpleBackdrop from '@/components/SimpleBackdrop'
+
 import messageService from '@/components/Message'
 import { editProfile } from '@/utils/http/meRequest'
+import SimpleBackdrop from '@/components/SimpleBackdrop'
+import { imageUpload } from '@/utils/http/meRequest'
 
 
 export default function BasicInfo (props): JSX.Element {
+
   const [edit, setEdit] = useState(false);
   const [loading, setLoading] = useState(false)
-  const [firstName, setFirstName] = useState(props.firstName)
-  const [lastName, setLastName] = useState(props.lastName)
-  const [introduction, setIntroduction] = useState(props.introduction)
-  const [email, setEmail] = useState(props.email)
+  const [firstName, setFirstName] = useState(props.firstName||"")
+  const [lastName, setLastName] = useState(props.lastName||"")
+  const [introduction, setIntroduction] = useState(props.shortIntroduction||"")
+  const [email, setEmail] = useState(props.email||"")
   // const [phone, setPhone] = useState(props.phone)
-  const [description, setDescription] = useState(props.description)
+  const [description, setDescription] = useState(props.introduction||"")
+  const [formData, setFormData] = useState("")
 
   const handleSubmit=async (event)=>{
     event.preventDefault()
     if(edit){
+     
+      setLoading(true)
+
+      const responseUrl=await imageUpload(formData);
+
       const profile={
         firstName,
         lastName,
-        introduction,
-        email
+        introduction:description,
+        shortIntroduction:introduction,
+        email,
+        avatarUrl:responseUrl
       }
-      setLoading(true)
+
       const response = await editProfile(profile)
       if(response){
         messageService.success({
@@ -44,9 +55,16 @@ export default function BasicInfo (props): JSX.Element {
         })
       }
       setLoading(false)
+      window.location.reload()
+    }
+    setEdit(!edit)
   }
-  setEdit(!edit)
-}
+
+  const handleImageChange=(file)=>{
+    setFormData(file)
+  }
+
+
 
   return (
         <Box
@@ -64,7 +82,6 @@ export default function BasicInfo (props): JSX.Element {
             <ListItemText primary="followers" secondary={props.totalFollowedByUsers} />
             <ListItemText primary="Likes" secondary={props.totalLikedEvents} />
             <ListItemText primary="joins" secondary={props.totalJoinedEvents} />
-
         </List>
         <div className='flex w-4/5 justify-between'>
         <TextField id="outlined-read-only-input"
@@ -114,13 +131,11 @@ export default function BasicInfo (props): JSX.Element {
                       rows={4}
             label="description"
             name="description"
-            defaultValue={props.introduction}
-            InputProps={{
-              readOnly: true
-            }}
+            value={description||""}
+            onChange={(e)=>setDescription(e.target.value)}
             className="w-4/5"
             disabled={!edit}/>
-            {edit&&<ImageUploader />}
+            {edit&&<ImageUploader callback={handleImageChange}/>}
             <Button variant="contained" color="primary" 
             className='self-end' type="submit">{edit?"save":"edit"}</Button>
       </Box>
