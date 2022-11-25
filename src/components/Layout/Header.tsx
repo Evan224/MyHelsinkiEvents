@@ -70,7 +70,7 @@ export default function Header (): JSX.Element {
   const navigate = useNavigate()
   const state = useAuth();
 
-  const [data]=useFetch(getProfile,{},[]);
+  // const [data]=useFetch(getProfile,{});
 
   const [open, setOpen] = useState(false);
 
@@ -108,7 +108,7 @@ export default function Header (): JSX.Element {
             Helsinki Events
           </Typography>
           <Tabmenu />
-          <Avatar src={data?.avatarUrl||""} sx={{ width: 30, height: 30, margin: 2 }} alt={data?.username}/>
+          {/* <Avatar src={data?.avatarUrl||""} sx={{ width: 30, height: 30, margin: 2 }} alt={data?.username}/> */}
           <Button color="inherit" sx={{
           }} onClick={() => {handleClick()}}>{
             state?.userType ? 'Logout' : 'Login'

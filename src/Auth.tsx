@@ -28,7 +28,6 @@ const AuthProvider = ({ children }:{children:any}) => {
             refreshLoginState();
             setUserType(null);
             messageService.error({content:"The token is expired! Please log in again",duration:3000});
-            // location.reload();
             location.href="/loginpage";
           }
           return error;
