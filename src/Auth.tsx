@@ -7,19 +7,16 @@ interface IAuthContext {
     handleLogin: (username:string,password:string)=>Promise<boolean>;
     handleLogout: ()=>void;
     handleSignUp: (email:string,username:string,password:string)=>Promise<boolean>;
-    userState:any;
 }
 
 const AuthContext = createContext<IAuthContext|null>(null);
 
 const AuthProvider = ({ children }:{children:any}) => {
     const init=localStorage.getItem("userType")||null;
-    const initState=localStorage.getItem("userState")||null;
     const token=localStorage.getItem("token")||null;
     axios.defaults.headers.common['Authorization'] =token||"-";
     axios.defaults.headers.common["Content-Type"] = "application/json";
     const [userType, setUserType] = useState<null|"admin"|"user">(init as null|"admin"|"user");
-    const [userState, setUserState] = useState<any>(initState);
 
     axios.interceptors.response.use(
         (response) => {
@@ -30,7 +27,6 @@ const AuthProvider = ({ children }:{children:any}) => {
           if(error.response.status===401){
             refreshLoginState();
             setUserType(null);
-            setUserState(null);
             messageService.error({content:"The token is expired! Please log in again",duration:3000});
             // location.reload();
             location.href="/loginpage";
@@ -44,7 +40,6 @@ const AuthProvider = ({ children }:{children:any}) => {
         const {data} = body;
         if(data.token){
             setUserType("user");
-            setUserState(data);
             axios.defaults.headers.common['Authorization'] =data.token;
             localStorage.setItem("userType","user");
             localStorage.setItem("id",data.user.id);
@@ -59,7 +54,6 @@ const AuthProvider = ({ children }:{children:any}) => {
     const handleLogout=()=>{
         localStorage.clear();
         setUserType(null)
-        setUserState(null)
     }
 
     const handleSignUp=async (email:string,username:string,password:string,)=>{
@@ -81,7 +75,6 @@ const AuthProvider = ({ children }:{children:any}) => {
         handleLogin,
         handleLogout,
         handleSignUp,
-        // userState
     }
 
     //the token is expired

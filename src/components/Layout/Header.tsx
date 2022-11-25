@@ -70,7 +70,7 @@ export default function Header (): JSX.Element {
   const navigate = useNavigate()
   const state = useAuth();
 
-  const [data]=useFetch(getProfile);
+  const [data]=useFetch(getProfile,{},[]);
 
   const [open, setOpen] = useState(false);
 

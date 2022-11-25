@@ -46,7 +46,7 @@ const getProfile = async () => {
 //   return result.data;
 // };
 
-const getMyEvents = async ({ search, tags, date, page }) => {
+const getMyEvents = async ({ search, tags, date, page }: any) => {
   const ifTags = tags ? { "Tags": { "name": tags } } : {};
   const response = await axios.post("/me", {
     action: "get-all-my-events",
