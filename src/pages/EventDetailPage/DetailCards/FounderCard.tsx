@@ -7,6 +7,7 @@ import { followUser,unFollowUser } from '@/utils/http/meRequest'
 import {useState} from 'react'
 import SimpleBackdrop from '@/components/SimpleBackdrop'
 import messageService from '@/components/Message'
+import Avatar from '@mui/material/Avatar'
 
 export default function FounderCard (props): JSX.Element {
     const {Owner} = props
@@ -42,15 +43,16 @@ export default function FounderCard (props): JSX.Element {
         <Card >
             <SimpleBackdrop open={loading} />
             <CardContent className='flex flex-col items-center'>
-                    <div className='w-1/2 mx-auto p-4'>
+                    {/* <div className='w-1/2 mx-auto p-4'>
                         <img src={Owner.avatarUrl}></img>
-                    </div>
-                    <Typography variant='h5' gutterBottom>
+                    </div> */}
+                    <Avatar alt="Remy Sharp" src={Owner.avatarUrl} sx={{ width: 80, height: 80 }} />
+                    <Typography variant='h5' gutterBottom className="p-4">
                         {Owner.username}
                     </Typography>
 
-                    <Typography variant="body1">
-                        {Owner.introduction}
+                    <Typography variant="body1" className="text-center">
+                        {Owner.introduction||'The founder has not written an introduction yet '}
                     </Typography>
                     <Button variant="contained" className="p-4" size="small" onClick={handleClick}>{
                         ifFollowed ? "Unfollow" : "Follow"

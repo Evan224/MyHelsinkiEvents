@@ -7,8 +7,9 @@ import {useAuth} from '@/Auth'
 import {useNavigate} from 'react-router-dom'
 import {getStandardDate,getMonthShortName} from '@/utils/index'
 import SimpleBackdrop from '@/components/SimpleBackdrop'
-import Message from '@/components/Message'
 import messageService from '@/components/Message'
+import Icon from '@mui/material/Icon'
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 // import Alert from '@/components/AlertExample'
 
 // interface TitleProps {
@@ -99,8 +100,8 @@ export default function TitleInfo (props:any): JSX.Element {
             <SimpleBackdrop open={loading} />
             {/* <Alert content={content} open={false} severity={severity} /> */}
             <Typography variant="h6" className='text-red-500 opacity-70 py-2'>
-            From &nbsp;&nbsp;&nbsp; {getMonthShortName(startDate.month)} {startDate.day}  {startDate.hour} &nbsp;&nbsp;&nbsp;
-            To &nbsp;&nbsp;&nbsp; {getMonthShortName(endDate.month)} {endDate.day} {endDate.hour}
+            <AccessAlarmIcon />  {startDate.day} {getMonthShortName(startDate.month)}  &nbsp;
+            ~ &nbsp; {endDate.day} {getMonthShortName(endDate.month)} 
             </Typography>
             <Typography variant="h4" className="">
                 {props.name}

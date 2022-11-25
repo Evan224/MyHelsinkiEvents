@@ -45,8 +45,11 @@ export default function AccordionItem(props) {
           <Typography sx={{ width: '33%', flexShrink: 0 }}>
             {name}
           </Typography>
-          {/* <Typography sx={{ color: 'text.secondary',width:"20%" }}>{founder || "None"}</Typography>
-          <Typography sx={{ color: 'text.secondary',width:"40%" }}>{DateStirng}</Typography> */}
+          <div>
+                   {Tags.map((tag:any) => {
+                          return <Chip label={tag.name} key={tag.name} className="p-4 m-4" />
+                   })}
+                 </div>
         </AccordionSummary>
         <AccordionDetails className='flex items-between justify-between'>
                 <CardMedia
@@ -58,8 +61,8 @@ export default function AccordionItem(props) {
                 image={thumbnailUrl}
                 alt="Not Found"
                  />
-                 <div className="flex flex-col justify-between">
-                 <Typography sx={{ color: 'text.secondary',padding:"1rem"}}>{description}</Typography>
+                 <div className="flex flex-col justify-between h-40">
+                 <Typography sx={{ color: 'text.secondary',padding:"1rem",textOverflow:"ellipsis"}}>{description}</Typography>
                  <div>
                    {Tags.map((tag:any) => {
                           return <Chip label={tag.name} key={tag.name} className="p-4 m-4" />

@@ -5,10 +5,12 @@ import {useState,useEffect} from "react";
 import SimpleBackdrop from "@/components/SimpleBackdrop";
 import EmptyEventList from "@/components/EmptyEvent";
 import Pagination from '@mui/material/Pagination';
+import { SecurityUpdateGoodSharp } from "@mui/icons-material";
 
 export default function SubTabPanel(props){
     const [loading, setLoading] = useState(false)
     const [page, setPage] = useState(1);
+    const [count, setCount] = useState(0);
     const {value,requestFunction,index,payload}=props;
     if(!value===index){
         return null;
@@ -19,6 +21,9 @@ export default function SubTabPanel(props){
             setLoading(true)
             try{
                 const events = await requestFunction({...payload,page});
+                // console.log(events,"events")
+                setCount(events.totalCount||0)
+                setPage(events.page)
                 setEvents(events.data)
             }catch(e){
                 console.log(e)
@@ -36,9 +41,8 @@ export default function SubTabPanel(props){
 
     return (
         <TabPanel value={value} index={index} >
-            <div className="p-4 mx-auto w-[100vw]">
-                 <Pagination count={10} defaultPage={1} siblingCount={0} onChange={handleChangePage}/>
-
+            <div className="p-4 flex flex-row-reverse mx-auto w-4/5">
+                 <Pagination count={Math.ceil(count/6)} defaultPage={1} siblingCount={0} onChange={handleChangePage}/>
             </div>
             <SimpleBackdrop open={loading}/>
                 {ifEvents?<EventList events={events} cssStyle="flex flex-wrap justify-center"/>:<EmptyEventList/>}

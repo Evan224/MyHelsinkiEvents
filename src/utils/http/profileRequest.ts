@@ -27,10 +27,37 @@ const getProfile = async () => {
   return response;
 };
 
-const getMyEvents = async () => {
+// const getFollowerEvents = async ({ search, tags, date, page }) => {
+//   const ifTags = tags ? { "Tags": { "name": tags } } : {};
+//   const result = await axios.post(
+//     "/me",
+//     JSON.stringify({
+//       "action": "get-all-events-from-users-i-followed",
+//       "payload": {
+//         "page": page || 1,
+//         "pageSize": 6,
+//         "where": {
+//           "name": search,
+//           ...ifTags,
+//         },
+//       },
+//     }),
+//   );
+//   return result.data;
+// };
+
+const getMyEvents = async ({ search, tags, date, page }) => {
+  const ifTags = tags ? { "Tags": { "name": tags } } : {};
   const response = await axios.post("/me", {
     action: "get-all-my-events",
-    payload: {},
+    payload: {
+      "page": page || 1,
+      "pageSize": 6,
+      "where": {
+        "name": search,
+        ...ifTags,
+      },
+    },
   });
 
   return response.data;

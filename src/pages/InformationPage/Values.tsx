@@ -30,26 +30,26 @@ export default function Values (): JSX.Element {
 const ValueList = [
   {
     value: 'Dynamic Teams',
-    text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'
+    text: 'Our group is very dynamic and we are always looking for new members to join us.'
   },
   {
     value: 'Great teammates',
-    text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'
+    text: 'Our team is very friendly and we are always caring about each other.'
   },
   {
     value: 'Open communication',
-    text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'
+    text: 'We are open to new ideas and we are always ready to listen to our teammates.'
   },
   {
     value: 'Autonomy and attitude',
-    text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'
+    text: 'We are a team of highly motivated people who love what they do.'
   },
   {
     value: 'Support and win',
-    text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'
+    text: 'We are always ready to help each other and we are always ready to win.'
   },
   {
     value: 'Teamwork makes the dream work',
-    text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.'
+    text: 'We are always ready to work together and we are always ready to achieve our goals.'
   }
 ]

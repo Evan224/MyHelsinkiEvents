@@ -10,7 +10,7 @@ export default function InformationPage (): JSX.Element {
         <div className="flex flex-col justify-center items-center w-[100vw] divide-y">
           <Hire />
           <Values />
-          <About />
+          {/* <About /> */}
           <Contact />
         </div>
   )

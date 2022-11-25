@@ -10,7 +10,7 @@ import { useState } from 'react';
 import ImageUploader from './ImageUploader';
 import TagBar from '../TagBar';
 import Button from '@mui/material/Button';
-import { createEvent,editEvent} from '@/utils/http/eventRequest';
+import { createEvent,editEvent,deleteEvent} from '@/utils/http/eventRequest';
 import SimpleBackdrop from '../SimpleBackdrop';
 import messageService from '../Message';
 import { imageUpload } from '@/utils/http/meRequest'
@@ -85,6 +85,22 @@ export default function CreateForm(props:any) {
 
     const handleDelete=async (event:any)=>{
         event.preventDefault()
+        setLoading(true)
+        try{
+            const response=await deleteEvent(props.id)
+            if(response.status===200){
+                messageService.success({
+                    content:"Delete event successfully",
+                    duration:2000
+            })}
+        }catch(e){
+            messageService.error({
+                content:"Delete event failed!",
+                duration:2000
+            })
+        }
+        setLoading(false)
+        handleCallback()
         // delete event
     }
 
@@ -149,7 +165,7 @@ export default function CreateForm(props:any) {
              <div className="p-4 flex flex-row-reverse justify-between">
                 <Button variant="contained" color="primary" className="w-1/3 p-4" type="submit">
                    {ifCreate?"Create":"Save"}</Button>
-                   {!ifCreate&&<Button variant="contained" color="primary" className="w-1/3 p-4" onClick={handleDelete} >
+                   {!ifCreate&&<Button variant="contained" color="error" className="w-1/3 p-4" onClick={handleDelete} >
                    Delete</Button>}
              </div>
         </Box>

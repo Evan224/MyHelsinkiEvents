@@ -5,18 +5,18 @@ export default function Hire (): JSX.Element {
         <div className="flex justify-center w-4/5 p-5 pt-20 flex-col items-center
             min-h-[40vh] ">
              <Typography variant="h3" component="div" className='p-5'>
-                Work with Us!
+                Build software with us!
             </Typography>
             <Typography variant="h6" component="div" sx={{
               color: 'text.secondary'
-            }} className="flex justify-center items-center" >
+            }} className="flex justify-center items-center text-center" >
             Work hard with highly motivated team of talented people to launch
-                perfectly crafted
+                perfectly crafted products we will love.
             </Typography>
             <Typography variant="h6" component="div" sx={{
               color: 'text.secondary'
             }} className="flex justify-center items-center" >
-            products you will love.
+            
             </Typography>
             <Button variant="contained" color="primary" sx={{
               marginTop: '2rem'

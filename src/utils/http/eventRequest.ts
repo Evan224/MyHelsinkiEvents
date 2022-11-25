@@ -162,6 +162,19 @@ const createEvent = async (payload) => {
   return result;
 };
 
+const deleteEvent = async (eventId) => {
+  const result = await axios.post("/me", {
+    action: "edit-an-event",
+    payload: {
+      eventId,
+      data: {
+        "visibility": 0,
+      },
+    },
+  });
+  return result;
+};
+
 const editEvent = async (payload) => {
   const result = await axios.post("/me", {
     payload,
@@ -172,6 +185,7 @@ const editEvent = async (payload) => {
 
 export {
   createEvent,
+  deleteEvent,
   editEvent,
   getAllEvents,
   getAlljoinedEvents,

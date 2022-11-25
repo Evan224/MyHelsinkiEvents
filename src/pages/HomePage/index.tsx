@@ -32,7 +32,7 @@ export default function HomePage (): JSX.Element {
             <EventList events={events}/>
             <LoadMore />
             <CreateEvent />
-            <Title title="Daily Recommendation" />
+            <Title title="See What Editors Recommend" />
             <EditorCardList />
         </div>
   )

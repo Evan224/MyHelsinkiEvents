@@ -37,7 +37,7 @@ export default function EventCard (props: Event.IEvent): JSX.Element {
         alt="Not Found"
       />
       <CardContent className='flex flex-col hover:bg-gray-100' sx={{
-        height: '10rem',
+        height: '9rem',
         padding: '1rem'
       }} onClick={e => { navigate('/eventdetail',{
         state:props.id,
@@ -56,7 +56,7 @@ export default function EventCard (props: Event.IEvent): JSX.Element {
           </div>
         </div>
         <Typography gutterBottom variant="body2" component="div" sx={{
-          height: '3rem',
+          textOverflow: 'ellipsis',
         }}>
           {description}
         </Typography>

@@ -12,7 +12,8 @@ import Tabs from '@mui/material/Tabs'
 import LinkTab from '@mui/material/Tab'
 import { useAuth } from '@/Auth'
 import ConfirmBox from '../Confirm'
-
+import { getProfile } from '@/utils/http/profileRequest'
+import useFetch from '@/utils/hooks/useFetch'
 
 const getValueIndex= (path: string|boolean) => {
   const index = menu.findIndex((item) => item.path === path)
@@ -23,6 +24,7 @@ const getValueIndex= (path: string|boolean) => {
 const Tabmenu = (): JSX.Element => {
   const location = useLocation()
   const [value, setValue] = useState<number|boolean>(getValueIndex(location.pathname));
+
 
   const state=useAuth()
   const newMenu = useMemo(() => {
@@ -68,6 +70,8 @@ export default function Header (): JSX.Element {
   const navigate = useNavigate()
   const state = useAuth();
 
+  const [data]=useFetch(getProfile);
+
   const [open, setOpen] = useState(false);
 
   const LogoutCallback = (ifLogout) => {
@@ -101,10 +105,10 @@ export default function Header (): JSX.Element {
             <EventIcon color="primary"/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Welcome To Helsinki Events!
+            Helsinki Events
           </Typography>
           <Tabmenu />
-          <Avatar alt="Remy Sharp" src="" sx={{ width: 30, height: 30, margin: 2 }} />
+          <Avatar src={data?.avatarUrl||""} sx={{ width: 30, height: 30, margin: 2 }} alt={data?.username}/>
           <Button color="inherit" sx={{
           }} onClick={() => {handleClick()}}>{
             state?.userType ? 'Logout' : 'Login'

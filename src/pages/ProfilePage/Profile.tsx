@@ -25,7 +25,7 @@ export default function ProfileCard (props): JSX.Element {
         {/* <SimpleBackdrop open={loading}/> */}
         <CardContent>
           <Typography gutterBottom variant="h5" component="div" className="flex">
-            <Avatar sx={{ height: 80, width: 80 }} src={props.avatarUrl}></Avatar>
+            <Avatar sx={{ height: 80, width: 80 }} src={props.avatarUrl} alt={props.username}></Avatar>
             <div className='flex flex-col justify-around p-5'>
               <Typography variant="h6" component="div">
                   {props.username}

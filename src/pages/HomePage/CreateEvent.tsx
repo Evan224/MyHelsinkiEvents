@@ -5,14 +5,14 @@ export default function CreateEvent (): JSX.Element {
     const navigate = useNavigate()
 
   return (
-        <div className='flex flex-col mx-auto items-center text-cyan-800 justify-center
-         bg-cyan-100 min-h-[20vh] w-full p-4'>
-            <div>
-                <h1 className='text-4xl font-bold text-center'>Want to hold an event?</h1>
-                <p> Come and Post an event in 5 Minutes</p>
+        <div className='flex flex-col mx-auto items-center text-cyan-800 justify-center items-center
+         bg-cyan-100 min-h-[20vh] w-full p-20'>
+            <div >
+                <h1 className='text-4xl font-bold text-center p-5'>Want to hold an event?</h1>
+                <div className="text-4xl font-bold text-center "> Come and Post an event in 1 Minutes</div>
                 <div className="flex justify-around mt-10">
                     <Button variant="outlined" color="primary" className="w-2/5" onClick={()=>{
-                        navigate('/ProfilePage')
+                        navigate('/managepage')
                     }}>
                         Create Event</Button>
                 </div>
